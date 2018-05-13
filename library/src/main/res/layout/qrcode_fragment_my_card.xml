@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff111111"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="24dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="57dp"
+            android:layout_height="36dp"
+            android:paddingLeft="21dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/qrcode_ic_back" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RelativeLayout
+        android:id="@+id/rl_background"
+        android:layout_width="301dp"
+        android:layout_height="425dp"
+        android:background="@mipmap/qrcode_background_my_card_unkown">
+
+        <View
+            android:id="@+id/view_close"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true" />
+
+        <com.hm.iou.uikit.ShapedImageView
+            android:id="@+id/iv_header"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="41dp"
+            android:src="@mipmap/uikit_icon_header_unknow"
+            app:shape_mode="circle" />
+
+        <TextView
+            android:id="@+id/tv_nick_name"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_header"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@id/iv_header"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="昵称"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textFontSize_24" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_header"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="56dp"
+            android:layout_toRightOf="@id/iv_header"
+            android:text="@string/qrcode_not_authentication"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textFontSize_12" />
+
+
+        <TextView
+            android:id="@+id/tv_qr_code_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="39dp"
+            android:layout_marginRight="31dp"
+            android:lineSpacingExtra="4dp"
+            android:minWidth="114dp"
+            android:text="@string/qrcode_code_desc"
+            android:textColor="#ffbfecff"
+            android:textSize="@dimen/textFontSize_12" />
+
+        <ImageView
+            android:id="@+id/iv_qr_code"
+            android:layout_width="114dp"
+            android:layout_height="114dp"
+            android:layout_above="@+id/tv_qr_code_desc"
+            android:layout_alignEnd="@id/tv_qr_code_desc"
+            android:layout_marginBottom="10dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="4" />
+
+</LinearLayout>

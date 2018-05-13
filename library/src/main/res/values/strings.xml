@@ -1,0 +1,13 @@
+<resources>
+
+    <!--二维码和我的名片-->
+    <string name="qrcode_scan_tool">扫码工具</string>
+    <string name="qrcode_my_card">我的名片</string>
+    <string name="qrcode_not_find_code">未发现二维码</string>
+    <string name="qrcode_continue_scan_code">轻触屏幕继续扫描</string>
+    <string name="qrcode_user_name_left">实名:</string>
+    <string name="qrcode_user_name_id">ID:</string>
+    <string name="qrcode_code_desc">扫一扫上面的二维码\n扯一扯我们金钱关系</string>
+    <string name="qrcode_authentication">实名:</string>
+    <string name="qrcode_not_authentication">用户暂未实名</string>
+</resources>
