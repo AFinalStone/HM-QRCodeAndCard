@@ -25,9 +25,10 @@ public interface QRCodeContract {
         /**
          * 判断数据类型
          *
-         * @param qrCodeContent 扫描二维码得到的内容
+         * @param scanCodeBeginUrl 只有以这个url开头的域名，才进行识别
+         * @param qrCodeContent    扫描二维码得到的内容
          */
-        void judgeData(String qrCodeContent);
+        void judgeData(String scanCodeBeginUrl, String qrCodeContent);
     }
 
 }

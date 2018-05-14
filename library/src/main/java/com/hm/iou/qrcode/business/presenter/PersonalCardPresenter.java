@@ -36,7 +36,9 @@ public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardCont
         String userId = userDataBean.getShowId();
         String qrCodeUrl = userDataBean.getUserId();
         //昵称
-        mView.setUserNickName(nickName);
+        if (StringUtil.isEmpty(nickName)) {
+            mView.setUserNickName(nickName);
+        }
         //姓名和ID
         String userNameAndId;
         if (StringUtil.isEmpty(userName)) {

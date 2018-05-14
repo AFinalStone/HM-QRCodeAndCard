@@ -12,11 +12,10 @@ import com.hm.iou.qrcode.bean.IOUBriefMoney;
  */
 public class NavigationHelper {
 
-    public static void toMoneyReceiptInclude(Context context, IOUBriefMoney iouBriefMoney, String iouId) {
+    public static void toMoneyReceiptInclude(Context context, String iouId) {
         try {
             Intent intent = new Intent(context, Class.forName("com.hm.iou.hmreceipt.ui.activity.receipt.MoneyReceiptIncludeActivity"));
-            intent.putExtra("intent_iou_object", iouBriefMoney);
-            intent.putExtra("intent_iou_id", iouId);
+            intent.putExtra("iou_id", iouId);
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

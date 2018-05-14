@@ -1,4 +1,4 @@
-package com.hm.iou.hm_scancodeandpersonalcard;
+package com.hm.iou.scancodeandcard;
 
 import org.junit.Test;
 

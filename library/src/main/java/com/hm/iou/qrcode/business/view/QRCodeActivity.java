@@ -32,6 +32,7 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
     public static final String EXTRA_KEY_SHOW_TYPE = "show_type";
     public static final String EXTRA_KEY_SHOW_MY_CARD = "show_my_card";
     public static final String EXTRA_KEY_SHOW_SCAN_CODE = "show_scan_code";
+    public static final String EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL = "show_scan_code_begin_url";
 
 
     ScanCodeFragment mScanCodeFragment;
@@ -43,13 +44,15 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
     @BindView(R2.id.ll_myCard)
     LinearLayout mLlMyCard;
 
+    private String mShowType;
+    private String mScanCodeBeginUrl;
     /**
      * 二维码解析回调函数
      */
     private CodeUtils.AnalyzeCallback mAnalyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
-        public void onAnalyzeSuccess( String result) {
-            mPresenter.judgeData(result);
+        public void onAnalyzeSuccess(String result) {
+            mPresenter.judgeData(mScanCodeBeginUrl, result);
         }
 
         @Override
@@ -69,12 +72,24 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
 
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
-        String showType = getIntent().getStringExtra(EXTRA_KEY_SHOW_TYPE);
-        if (EXTRA_KEY_SHOW_MY_CARD.equals(showType)) {
+        mShowType = getIntent().getStringExtra(EXTRA_KEY_SHOW_TYPE);
+        mScanCodeBeginUrl = getIntent().getStringExtra(EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL);
+        if (savedInstanceState != null) {
+            mShowType = savedInstanceState.getString(EXTRA_KEY_SHOW_TYPE);
+            mScanCodeBeginUrl = getIntent().getStringExtra(EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL);
+        }
+        if (EXTRA_KEY_SHOW_MY_CARD.equals(mShowType)) {
             showMyCardFragment();
-        } else if (EXTRA_KEY_SHOW_SCAN_CODE.equals(showType)) {
+        } else if (EXTRA_KEY_SHOW_SCAN_CODE.equals(mShowType)) {
             showScanCodeFragment();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_SHOW_TYPE, mShowType);
+        outState.putString(EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL, mScanCodeBeginUrl);
     }
 
     @SuppressLint("InvalidR2Usage")
