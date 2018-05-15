@@ -68,10 +68,10 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
             } else if (URL_TYPE_MY_CARD.equals(type)) {
 
             } else {
-                mView.toastMessage("该功能暂未开放");
+                mView.toastMessage(qrCodeContent);
             }
         } else {
-            mView.toastMessage("借条管家暂不支持此种二维码");
+            mView.toastMessage(qrCodeContent);
         }
     }
 
