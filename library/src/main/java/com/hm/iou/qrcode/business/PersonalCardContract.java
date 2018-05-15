@@ -22,8 +22,9 @@ public interface PersonalCardContract {
 
         /**
          * 设置头像
-         * @param imageResIdDefault  站位图，可能是未知，男性，女性
-         * @param imageUrl 真正的头像
+         *
+         * @param imageResIdDefault 站位图，可能是未知，男性，女性
+         * @param imageUrl          真正的头像
          */
         void setHeader(int imageResIdDefault, String imageUrl);
 
@@ -51,6 +52,9 @@ public interface PersonalCardContract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
+        /**
+         * 获取用户信息
+         */
         void getUserInfo();
     }
 

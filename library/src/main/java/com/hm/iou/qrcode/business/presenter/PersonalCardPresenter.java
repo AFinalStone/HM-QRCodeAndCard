@@ -15,6 +15,9 @@ import com.hm.iou.tools.StringUtil;
 
 public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardContract.View> implements PersonalCardContract.Presenter {
 
+    //个人名片二维码暂时使用借条管家官网代替
+    private static final String APP_OFFICIAL_WEBSITE_URL = "http://54jietiao.com/m-index.html";
+
     private UserManager mUserManager;
 
     public PersonalCardPresenter(@NonNull Context context, @NonNull PersonalCardContract.View view) {
@@ -34,7 +37,7 @@ public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardCont
         String nickName = userDataBean.getNickName();
         String userName = userDataBean.getName();
         String userId = userDataBean.getShowId();
-        String qrCodeUrl = userDataBean.getUserId();
+        String qrCodeUrl = APP_OFFICIAL_WEBSITE_URL;
         //昵称
         if (StringUtil.isEmpty(nickName)) {
             mView.setUserNickName(nickName);

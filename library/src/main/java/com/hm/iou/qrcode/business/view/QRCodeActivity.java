@@ -17,6 +17,7 @@ import com.hm.iou.qrcode.business.QRCodeContract;
 import com.hm.iou.qrcode.business.presenter.QRCodePresenter;
 import com.hm.iou.scancode.CodeUtils;
 import com.hm.iou.scancode.view.ScanCodeFragment;
+import com.hm.iou.tools.StringUtil;
 import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
 
@@ -30,10 +31,12 @@ import butterknife.OnClick;
 public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRCodeContract.View {
 
     public static final String EXTRA_KEY_SHOW_TYPE = "show_type";
-    public static final String EXTRA_KEY_SHOW_MY_CARD = "show_my_card";
-    public static final String EXTRA_KEY_SHOW_SCAN_CODE = "show_scan_code";
-    public static final String EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL = "show_scan_code_begin_url";
+    public static final String EXTRA_KEY_SCAN_CODE_BEGIN_URL = "scan_code_begin_url";
 
+    //显示我的名片
+    public static final String SHOW_TYPE_MY_CARD = "show_my_card";
+    //显示扫码页面
+    public static final String SHOW_TYPE_SCAN_CODE = "show_scan_code";
 
     ScanCodeFragment mScanCodeFragment;
     PersonalCardFragment mPersonalCardFragment;
@@ -73,14 +76,14 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
         mShowType = getIntent().getStringExtra(EXTRA_KEY_SHOW_TYPE);
-        mScanCodeBeginUrl = getIntent().getStringExtra(EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL);
+        mScanCodeBeginUrl = getIntent().getStringExtra(EXTRA_KEY_SCAN_CODE_BEGIN_URL);
         if (savedInstanceState != null) {
             mShowType = savedInstanceState.getString(EXTRA_KEY_SHOW_TYPE);
-            mScanCodeBeginUrl = getIntent().getStringExtra(EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL);
+            mScanCodeBeginUrl = getIntent().getStringExtra(EXTRA_KEY_SCAN_CODE_BEGIN_URL);
         }
-        if (EXTRA_KEY_SHOW_MY_CARD.equals(mShowType)) {
+        if (SHOW_TYPE_MY_CARD.equals(mShowType)) {
             showMyCardFragment();
-        } else if (EXTRA_KEY_SHOW_SCAN_CODE.equals(mShowType)) {
+        } else if (SHOW_TYPE_SCAN_CODE.equals(mShowType)) {
             showScanCodeFragment();
         }
     }
@@ -89,7 +92,7 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(EXTRA_KEY_SHOW_TYPE, mShowType);
-        outState.putString(EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL, mScanCodeBeginUrl);
+        outState.putString(EXTRA_KEY_SCAN_CODE_BEGIN_URL, mScanCodeBeginUrl);
     }
 
     @SuppressLint("InvalidR2Usage")

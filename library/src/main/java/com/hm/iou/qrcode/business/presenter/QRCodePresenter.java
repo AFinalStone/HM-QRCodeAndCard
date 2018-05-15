@@ -1,6 +1,7 @@
 package com.hm.iou.qrcode.business.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
@@ -14,17 +15,20 @@ import com.hm.iou.qrcode.bean.IOUBriefMoney;
 import com.hm.iou.qrcode.business.QRCodeContract;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
+import com.hm.iou.tools.StringUtil;
 import com.hm.iou.tools.ToastUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> implements QRCodeContract.Presenter {
 
     private static final String URL_PARAMETER_PROTOCOL = "protocol";
-    private static final String URL_TYPE_IOU = "1"; //电子借条
-    private static final String URL_TYPE_MY_CARD = "2";//个人名片
     private static final String URL_PARAMETER_JUSTID = "justiceId";
+    private static final String PARAMETER_PROTOCOL_TYPE_IOU = "1"; //电子借条
 
-//    http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
+    //    http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
+    //允许识别的url
+    private static final String URL_BEGIN_DEFAULT_HTTP = "http://h5.54jietiao.com";
+    private static final String URL_BEGIN_DEFAULT_HTTPS = "https://h5.54jietiao.com";
 
     public QRCodePresenter(@NonNull Context context, @NonNull QRCodeContract.View view) {
         super(context, view);
@@ -58,20 +62,42 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
 
     @Override
     public void judgeData(String scanCodeBeginUrl, String qrCodeContent) {
-        Logger.d(qrCodeContent);
-        if (qrCodeContent.startsWith(scanCodeBeginUrl)) {
-            Uri uri = Uri.parse(qrCodeContent);
-            String type = uri.getQueryParameter(URL_PARAMETER_PROTOCOL);
-            String id = uri.getQueryParameter(URL_PARAMETER_JUSTID);
-            if (URL_TYPE_IOU.equals(type)) {
-                searchData(id);
-            } else if (URL_TYPE_MY_CARD.equals(type)) {
-
-            } else {
-                mView.toastMessage(qrCodeContent);
-            }
+        if (!StringUtil.isEmpty(scanCodeBeginUrl) && qrCodeContent.startsWith(scanCodeBeginUrl)) {
+            //如果scanCodeBeginUrl不为空,且qrCode以scanCodeBeginUrl开头，则进行解析
+            parseUrl(qrCodeContent);
+        } else if (qrCodeContent.startsWith(URL_BEGIN_DEFAULT_HTTP) || qrCodeContent.startsWith(URL_BEGIN_DEFAULT_HTTPS)) {
+            //如果scanCodeBeginUrl为空，则使用默认的url作为校验开头，进行解析
+            parseUrl(qrCodeContent);
         } else {
             mView.toastMessage(qrCodeContent);
+        }
+    }
+
+    /**
+     * 通过浏览器打开链接
+     *
+     * @param url 链接地址
+     */
+    private void openWebBrowser(String url) {
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(url));//Url 就是你要打开的网址
+        intent.setAction(Intent.ACTION_VIEW);
+        mContext.startActivity(intent); //启动浏览器
+    }
+
+    /**
+     * 如果是电子借条，则进行搜索收录,如果不是，则直接通过手机浏览器打开
+     *
+     * @param qrCodeContent 扫码识别出来的二维码
+     */
+    private void parseUrl(String qrCodeContent) {
+        Uri uri = Uri.parse(qrCodeContent);
+        String type = uri.getQueryParameter(URL_PARAMETER_PROTOCOL);
+        String id = uri.getQueryParameter(URL_PARAMETER_JUSTID);
+        if (PARAMETER_PROTOCOL_TYPE_IOU.equals(type)) {
+            searchData(id);
+        } else {
+            openWebBrowser(qrCodeContent);
         }
     }
 

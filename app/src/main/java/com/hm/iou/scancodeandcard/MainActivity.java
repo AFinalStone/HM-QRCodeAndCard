@@ -28,11 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     public void onClickScanCode(View view) {
         Intent intent = new Intent(this, QRCodeActivity.class);
-        intent.putExtra(QRCodeActivity.EXTRA_KEY_SHOW_TYPE, QRCodeActivity.EXTRA_KEY_SHOW_SCAN_CODE);
-        intent.putExtra(QRCodeActivity.EXTRA_KEY_SHOW_SCAN_CODE_BEGIN_URL, "http://192.168.1.254");
+        intent.putExtra(QRCodeActivity.EXTRA_KEY_SHOW_TYPE, QRCodeActivity.SHOW_TYPE_SCAN_CODE);
+        intent.putExtra(QRCodeActivity.EXTRA_KEY_SCAN_CODE_BEGIN_URL, "http://192.168.1.254");
         startActivity(intent);
     }
 
