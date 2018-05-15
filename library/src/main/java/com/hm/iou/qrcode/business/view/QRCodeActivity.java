@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
+import com.hm.iou.base.utils.PermissionUtil;
 import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.R2;
 import com.hm.iou.qrcode.business.QRCodeContract;
@@ -123,10 +124,11 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
                             mLlMyCard.setBackgroundColor(getResources().getColor(R.color.transparent));
                             mLlSweepCode.setBackgroundResource(R.mipmap.qrcode_background_tab_select);
                         } else {
-                            toastMessage("未授权相机权限，扫码功能不能使用");
+                            PermissionUtil.showCameraPermissionDialog(QRCodeActivity.this);
                         }
                     }
                 });
+
 
     }
 

@@ -16,7 +16,7 @@ import com.hm.iou.tools.StringUtil;
 public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardContract.View> implements PersonalCardContract.Presenter {
 
     //个人名片二维码暂时使用借条管家官网代替
-    private static final String APP_OFFICIAL_WEBSITE_URL = "http://54jietiao.com/m-index.html";
+    public static final String APP_OFFICIAL_WEBSITE_URL = "http://54jietiao.com/m-index.html";
 
     private UserManager mUserManager;
 

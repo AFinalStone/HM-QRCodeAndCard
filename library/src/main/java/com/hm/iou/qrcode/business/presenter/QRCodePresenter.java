@@ -65,11 +65,14 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
         if (!StringUtil.isEmpty(scanCodeBeginUrl) && qrCodeContent.startsWith(scanCodeBeginUrl)) {
             //如果scanCodeBeginUrl不为空,且qrCode以scanCodeBeginUrl开头，则进行解析
             parseUrl(qrCodeContent);
-        } else if (qrCodeContent.startsWith(URL_BEGIN_DEFAULT_HTTP) || qrCodeContent.startsWith(URL_BEGIN_DEFAULT_HTTPS)) {
+        } else if (qrCodeContent.startsWith(URL_BEGIN_DEFAULT_HTTP)
+                || qrCodeContent.startsWith(URL_BEGIN_DEFAULT_HTTPS)) {
             //如果scanCodeBeginUrl为空，则使用默认的url作为校验开头，进行解析
             parseUrl(qrCodeContent);
+        } else if (PersonalCardPresenter.APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
+            openWebBrowser(qrCodeContent);
         } else {
-            mView.toastMessage(qrCodeContent);
+            mView.toastMessage("当前版本暂不支持识别其他来源二维码");
         }
     }
 
@@ -93,11 +96,11 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     private void parseUrl(String qrCodeContent) {
         Uri uri = Uri.parse(qrCodeContent);
         String type = uri.getQueryParameter(URL_PARAMETER_PROTOCOL);
-        String id = uri.getQueryParameter(URL_PARAMETER_JUSTID);
         if (PARAMETER_PROTOCOL_TYPE_IOU.equals(type)) {
+            String id = uri.getQueryParameter(URL_PARAMETER_JUSTID);
             searchData(id);
         } else {
-            openWebBrowser(qrCodeContent);
+            mView.toastMessage("当前版本暂不支持该功能");
         }
     }
 
