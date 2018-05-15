@@ -1,5 +1,6 @@
 package com.hm.iou.qrcode.business.view;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -20,9 +21,11 @@ import com.hm.iou.scancode.view.ScanCodeFragment;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.tools.ToastUtil;
 import com.hm.iou.uikit.dialog.IOSAlertDialog;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 /**
  * @author syl
@@ -106,13 +109,25 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
     }
 
     public void showScanCodeFragment() {
-        if (mScanCodeFragment == null) {
-            mScanCodeFragment = new ScanCodeFragment();
-            mScanCodeFragment.setAnalyzeCallback(mAnalyzeCallback);
-        }
-        showFragment(mScanCodeFragment);
-        mLlMyCard.setBackgroundColor(getResources().getColor(R.color.transparent));
-        mLlSweepCode.setBackgroundResource(R.mipmap.qrcode_background_tab_select);
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions.request(Manifest.permission.CAMERA)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        if (aBoolean) {
+                            if (mScanCodeFragment == null) {
+                                mScanCodeFragment = new ScanCodeFragment();
+                                mScanCodeFragment.setAnalyzeCallback(mAnalyzeCallback);
+                            }
+                            showFragment(mScanCodeFragment);
+                            mLlMyCard.setBackgroundColor(getResources().getColor(R.color.transparent));
+                            mLlSweepCode.setBackgroundResource(R.mipmap.qrcode_background_tab_select);
+                        } else {
+                            toastMessage("未授权相机权限，扫码功能不能使用");
+                        }
+                    }
+                });
+
     }
 
     public void showMyCardFragment() {
