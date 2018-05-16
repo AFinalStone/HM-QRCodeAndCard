@@ -89,7 +89,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     }
 
     /**
-     * 如果是电子借条，则进行搜索收录,如果不是，则直接通过手机浏览器打开
+     * 如果是电子借条，则进行搜索收录,如果不是，则提示当前版本暂不支持该功能
      *
      * @param qrCodeContent 扫码识别出来的二维码
      */

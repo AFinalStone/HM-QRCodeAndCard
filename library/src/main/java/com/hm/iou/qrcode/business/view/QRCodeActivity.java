@@ -1,8 +1,6 @@
 package com.hm.iou.qrcode.business.view;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,22 +9,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.hm.iou.base.BaseActivity;
-import com.hm.iou.base.mvp.MvpActivityPresenter;
-import com.hm.iou.base.utils.PermissionUtil;
 import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.R2;
 import com.hm.iou.qrcode.business.QRCodeContract;
 import com.hm.iou.qrcode.business.presenter.QRCodePresenter;
 import com.hm.iou.scancode.CodeUtils;
 import com.hm.iou.scancode.view.ScanCodeFragment;
-import com.hm.iou.tools.StringUtil;
-import com.hm.iou.tools.ToastUtil;
-import com.hm.iou.uikit.dialog.IOSAlertDialog;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author syl
@@ -69,7 +60,7 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
 
     @Override
     protected int getLayoutId() {
-        return R.layout.qrcode_activity_qrcode;
+        return R.layout.qrcode_activity_scan_code;
     }
 
     @Override
@@ -110,26 +101,13 @@ public class QRCodeActivity extends BaseActivity<QRCodePresenter> implements QRC
     }
 
     public void showScanCodeFragment() {
-        RxPermissions rxPermissions = new RxPermissions(this);
-        rxPermissions.request(Manifest.permission.CAMERA)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) throws Exception {
-                        if (aBoolean) {
-                            if (mScanCodeFragment == null) {
-                                mScanCodeFragment = new ScanCodeFragment();
-                                mScanCodeFragment.setAnalyzeCallback(mAnalyzeCallback);
-                            }
-                            showFragment(mScanCodeFragment);
-                            mLlMyCard.setBackgroundColor(getResources().getColor(R.color.transparent));
-                            mLlSweepCode.setBackgroundResource(R.mipmap.qrcode_background_tab_select);
-                        } else {
-                            PermissionUtil.showCameraPermissionDialog(QRCodeActivity.this);
-                        }
-                    }
-                });
-
-
+        if (mScanCodeFragment == null) {
+            mScanCodeFragment = new ScanCodeFragment();
+            mScanCodeFragment.setAnalyzeCallback(mAnalyzeCallback);
+        }
+        showFragment(mScanCodeFragment);
+        mLlMyCard.setBackgroundColor(getResources().getColor(com.hm.iou.qrcode.R.color.transparent));
+        mLlSweepCode.setBackgroundResource(com.hm.iou.qrcode.R.mipmap.qrcode_background_tab_select);
     }
 
     public void showMyCardFragment() {
