@@ -1,4 +1,4 @@
-package com.hm.iou.scancodeandcard;
+package com.hm.iou.demo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
