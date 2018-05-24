@@ -9,6 +9,7 @@ import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.business.PersonalCardContract;
 import com.hm.iou.scancode.CodeUtils;
 import com.hm.iou.sharedata.UserManager;
+import com.hm.iou.sharedata.model.SexEnum;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.hm.iou.tools.DensityUtil;
 import com.hm.iou.tools.StringUtil;
@@ -51,13 +52,13 @@ public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardCont
         }
         mView.setUserNickName(userNameAndId);
         //头像
-        String sexEnum = userDataBean.getSex();
+        int sexEnum = userDataBean.getSex();
         int resIdHeader = R.mipmap.uikit_icon_header_unknow;
         int resIdCardBackground = R.mipmap.qrcode_background_my_card_unkown;
-        if ("MALE".equals(sexEnum)) {
+        if (sexEnum == SexEnum.MALE.getValue()) {
             resIdHeader = R.mipmap.uikit_icon_header_man;
             resIdCardBackground = R.mipmap.qrcode_background_my_card_man;
-        } else if ("FEMALE".equals(sexEnum)) {
+        } else if (sexEnum == SexEnum.FEMALE.getValue()) {
             resIdHeader = R.mipmap.uikit_icon_header_wuman;
             resIdCardBackground = R.mipmap.qrcode_background_my_card_wuman;
         }
