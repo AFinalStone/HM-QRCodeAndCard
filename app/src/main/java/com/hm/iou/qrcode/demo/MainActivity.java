@@ -11,6 +11,7 @@ import com.hm.iou.qrcode.business.view.QRCodeActivity;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
+import com.hm.iou.tools.Md5Util;
 import com.hm.iou.tools.ToastUtil;
 import com.sina.weibo.sdk.utils.MD5;
 
@@ -52,9 +53,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view) {
-        String pwd = MD5.hexdigest("123456".getBytes());
+        String pwd = Md5Util.getMd5ByString("123456");
+        MobileLoginReqBean reqBean = new MobileLoginReqBean();
+        reqBean.setMobile("15267163669");
+        reqBean.setQueryPswd(pwd);
         HttpReqManager.getInstance().getService(LoginService.class)
-                .mobileLogin("15267163669", pwd)
+                .mobileLogin(reqBean)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BaseResponse<UserInfo>>() {

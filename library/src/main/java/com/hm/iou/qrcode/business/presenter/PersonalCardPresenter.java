@@ -3,12 +3,14 @@ package com.hm.iou.qrcode.business.presenter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.hm.iou.base.mvp.MvpFragmentPresenter;
 import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.business.PersonalCardContract;
 import com.hm.iou.scancode.CodeUtils;
 import com.hm.iou.sharedata.UserManager;
+import com.hm.iou.sharedata.model.CustomerTypeEnum;
 import com.hm.iou.sharedata.model.SexEnum;
 import com.hm.iou.sharedata.model.UserInfo;
 import com.hm.iou.tools.DensityUtil;
@@ -31,26 +33,31 @@ public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardCont
 
     }
 
+    public static boolean isCClass(int userType) {
+        if (userType == CustomerTypeEnum.CSub.getValue() || userType == CustomerTypeEnum.CPlus.getValue())
+            return true;
+        return false;
+    }
 
     @Override
     public void getUserInfo() {
         UserInfo userDataBean = mUserManager.getUserInfo();
+        int customerTypeEnum = userDataBean.getType();
         String nickName = userDataBean.getNickName();
         String userName = userDataBean.getName();
         String userId = userDataBean.getShowId();
         String qrCodeUrl = APP_OFFICIAL_WEBSITE_URL;
         //昵称
-        if (StringUtil.isEmpty(nickName)) {
-            mView.setUserNickName(nickName);
-        }
+        mView.setUserNickName(TextUtils.isEmpty(nickName) ? "无" : nickName);
+
         //姓名和ID
         String userNameAndId;
-        if (StringUtil.isEmpty(userName)) {
+        if (isCClass(customerTypeEnum)) {
             userNameAndId = mContext.getString(R.string.qrcode_not_authentication) + " | " + userId;
         } else {
             userNameAndId = mContext.getString(R.string.qrcode_authentication) + userName + " | " + userId;
         }
-        mView.setUserNickName(userNameAndId);
+        mView.setUserNameAndID(userNameAndId);
         //头像
         int sexEnum = userDataBean.getSex();
         int resIdHeader = R.mipmap.uikit_icon_header_unknow;

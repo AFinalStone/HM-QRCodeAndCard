@@ -4,8 +4,7 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
 
 import io.reactivex.Flowable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 /**
@@ -14,8 +13,7 @@ import retrofit2.http.POST;
 
 public interface LoginService {
 
-    @POST("/acct/mobileLogin")
-    @FormUrlEncoded
-    Flowable<BaseResponse<UserInfo>> mobileLogin(@Field("loginName") String userPhone, @Field("queryPswd") String queryPswd);
+    @POST("/api/iou/user/v1/mobileLogin")
+    Flowable<BaseResponse<UserInfo>> mobileLogin(@Body MobileLoginReqBean mobileLoginReqBean);
 
 }
