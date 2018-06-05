@@ -31,11 +31,11 @@ public class PersonalCardFragment extends BaseFragment<PersonalCardPresenter> im
     ShapedImageView mIvHeader;
     @BindView(R2.id.rl_background)
     RelativeLayout mRlBackground;
-    @BindView(R2.id.tv_nick_name)
+    @BindView(R2.id.tv_nickName)
     TextView mTvNickName;
-    @BindView(R2.id.tv_user_name)
+    @BindView(R2.id.tv_userName)
     TextView mTvUserName;
-    @BindView(R2.id.iv_qr_code)
+    @BindView(R2.id.iv_qrCode)
     ImageView mIvQrCode;
 
     @Override

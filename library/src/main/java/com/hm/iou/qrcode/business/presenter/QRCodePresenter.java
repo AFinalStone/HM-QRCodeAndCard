@@ -16,6 +16,7 @@ import com.hm.iou.qrcode.business.QRCodeContract;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.tools.StringUtil;
+import com.hm.iou.tools.SystemUtil;
 import com.hm.iou.tools.ToastUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -70,22 +71,10 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
             //如果scanCodeBeginUrl为空，则使用默认的url作为校验开头，进行解析
             parseUrl(qrCodeContent);
         } else if (PersonalCardPresenter.APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
-            openWebBrowser(qrCodeContent);
+            SystemUtil.openWebBrowser(mContext, qrCodeContent);
         } else {
             mView.toastMessage("当前版本暂不支持识别其他来源二维码");
         }
-    }
-
-    /**
-     * 通过浏览器打开链接
-     *
-     * @param url 链接地址
-     */
-    private void openWebBrowser(String url) {
-        Intent intent = new Intent();
-        intent.setData(Uri.parse(url));//Url 就是你要打开的网址
-        intent.setAction(Intent.ACTION_VIEW);
-        mContext.startActivity(intent); //启动浏览器
     }
 
     /**

@@ -40,12 +40,6 @@
         android:layout_height="425dp"
         android:background="@mipmap/qrcode_background_my_card_unkown">
 
-        <View
-            android:id="@+id/view_close"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true" />
-
         <com.hm.iou.uikit.ShapedImageView
             android:id="@+id/iv_header"
             android:layout_width="72dp"
@@ -56,10 +50,11 @@
             app:shape_mode="circle" />
 
         <TextView
-            android:id="@+id/tv_nick_name"
-            android:layout_width="130dp"
+            android:id="@+id/tv_nickName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/iv_header"
+            android:layout_marginEnd="21dp"
             android:layout_marginStart="21dp"
             android:layout_marginTop="9dp"
             android:layout_toRightOf="@id/iv_header"
@@ -70,26 +65,29 @@
             android:textSize="@dimen/textFontSize_24" />
 
         <TextView
-            android:id="@+id/tv_user_name"
+            android:id="@+id/tv_userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/iv_header"
+            android:layout_marginEnd="21dp"
             android:layout_marginStart="21dp"
             android:layout_marginTop="56dp"
             android:layout_toRightOf="@id/iv_header"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="@string/qrcode_not_authentication"
             android:textColor="@color/white"
             android:textSize="@dimen/textFontSize_12" />
 
 
         <TextView
-            android:id="@+id/tv_qr_code_desc"
+            android:id="@+id/tv_qrCodeDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="39dp"
-            android:layout_marginRight="31dp"
+            android:layout_marginEnd="31dp"
             android:lineSpacingExtra="4dp"
             android:minWidth="114dp"
             android:text="@string/qrcode_code_desc"
@@ -97,11 +95,11 @@
             android:textSize="@dimen/textFontSize_12" />
 
         <ImageView
-            android:id="@+id/iv_qr_code"
+            android:id="@+id/iv_qrCode"
             android:layout_width="114dp"
             android:layout_height="114dp"
-            android:layout_above="@+id/tv_qr_code_desc"
-            android:layout_alignEnd="@id/tv_qr_code_desc"
+            android:layout_above="@+id/tv_qrCodeDesc"
+            android:layout_alignEnd="@id/tv_qrCodeDesc"
             android:layout_marginBottom="10dp" />
     </RelativeLayout>
 

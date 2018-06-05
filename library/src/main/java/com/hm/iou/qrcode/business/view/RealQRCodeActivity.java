@@ -96,6 +96,8 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
         if (mScanCodeFragment == null) {
             mScanCodeFragment = new ScanCodeFragment();
             mScanCodeFragment.setAnalyzeCallback(mAnalyzeCallback);
+        } else {
+            mScanCodeFragment.startCamera();
         }
         showFragment(mScanCodeFragment);
         mLlMyCard.setBackgroundColor(getResources().getColor(com.hm.iou.qrcode.R.color.transparent));
@@ -107,6 +109,9 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
             mPersonalCardFragment = new PersonalCardFragment();
         }
         showFragment(mPersonalCardFragment);
+        if (mScanCodeFragment != null) {
+            mScanCodeFragment.stopCamera();
+        }
         mLlSweepCode.setBackgroundColor(getResources().getColor(R.color.transparent));
         mLlMyCard.setBackgroundResource(R.mipmap.qrcode_background_tab_select);
     }
