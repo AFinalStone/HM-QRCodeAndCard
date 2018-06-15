@@ -35,14 +35,13 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
     LinearLayout mLlMyCard;
 
     private String mShowType;
-    private String mScanCodeBeginUrl;
     /**
      * 二维码解析回调函数
      */
     private CodeUtils.AnalyzeCallback mAnalyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
         public void onAnalyzeSuccess(String result) {
-            mPresenter.judgeData(mScanCodeBeginUrl, result);
+            mPresenter.judgeData(result);
         }
 
         @Override
@@ -63,26 +62,26 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
     @Override
     protected void initEventAndData(Bundle savedInstanceState) {
         mShowType = getIntent().getStringExtra(QRCodeActivity.EXTRA_KEY_SHOW_TYPE);
-        mScanCodeBeginUrl = getIntent().getStringExtra(QRCodeActivity.EXTRA_KEY_SCAN_CODE_BEGIN_URL);
         if (savedInstanceState != null) {
             mShowType = savedInstanceState.getString(QRCodeActivity.EXTRA_KEY_SHOW_TYPE);
-            mScanCodeBeginUrl = getIntent().getStringExtra(QRCodeActivity.EXTRA_KEY_SCAN_CODE_BEGIN_URL);
         }
         if (QRCodeActivity.SHOW_TYPE_MY_CARD.equals(mShowType)) {
             showMyCardFragment();
-        } else if (QRCodeActivity.SHOW_TYPE_SCAN_CODE.equals(mShowType)) {
-            showScanCodeFragment();
+            return;
         }
+        if (QRCodeActivity.SHOW_TYPE_SCAN_CODE.equals(mShowType)) {
+            showScanCodeFragment();
+            return;
+        }
+        finish();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(QRCodeActivity.EXTRA_KEY_SHOW_TYPE, mShowType);
-        outState.putString(QRCodeActivity.EXTRA_KEY_SCAN_CODE_BEGIN_URL, mScanCodeBeginUrl);
     }
 
-    @SuppressLint("InvalidR2Usage")
     @OnClick({R2.id.ll_sweepCode, R2.id.ll_myCard})
     public void onClick(View view) {
         if (R.id.ll_sweepCode == view.getId()) {

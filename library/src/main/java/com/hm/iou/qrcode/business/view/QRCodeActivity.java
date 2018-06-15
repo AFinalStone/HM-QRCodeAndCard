@@ -22,7 +22,6 @@ import io.reactivex.functions.Consumer;
 public class QRCodeActivity<T extends MvpActivityPresenter> extends BaseActivity<T> {
 
     public static final String EXTRA_KEY_SHOW_TYPE = "show_type";
-    public static final String EXTRA_KEY_SCAN_CODE_BEGIN_URL = "scan_code_begin_url";
 
     //显示我的名片
     public static final String SHOW_TYPE_MY_CARD = "show_my_card";
@@ -46,10 +45,8 @@ public class QRCodeActivity<T extends MvpActivityPresenter> extends BaseActivity
     protected void initEventAndData(Bundle bundle) {
         Intent intent = getIntent();
         mShowType = intent.getStringExtra(EXTRA_KEY_SHOW_TYPE);
-        mScanCodeBeginUrl = intent.getStringExtra(EXTRA_KEY_SCAN_CODE_BEGIN_URL);
         if (bundle != null) {
             mShowType = bundle.getString(EXTRA_KEY_SHOW_TYPE);
-            mScanCodeBeginUrl = bundle.getString(EXTRA_KEY_SCAN_CODE_BEGIN_URL);
         }
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.request(Manifest.permission.CAMERA)
@@ -80,13 +77,11 @@ public class QRCodeActivity<T extends MvpActivityPresenter> extends BaseActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(EXTRA_KEY_SHOW_TYPE, mShowType);
-        outState.putString(EXTRA_KEY_SCAN_CODE_BEGIN_URL, mScanCodeBeginUrl);
     }
 
     private void toRealQRCodeActivity() {
         Intent intent = new Intent(QRCodeActivity.this, RealQRCodeActivity.class);
         intent.putExtra(EXTRA_KEY_SHOW_TYPE, mShowType);
-        intent.putExtra(EXTRA_KEY_SCAN_CODE_BEGIN_URL, mScanCodeBeginUrl);
         startActivity(intent);
         finish();
     }

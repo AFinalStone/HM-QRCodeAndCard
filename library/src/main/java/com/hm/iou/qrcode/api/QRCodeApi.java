@@ -7,6 +7,7 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 
 /**
@@ -28,6 +29,17 @@ public class QRCodeApi {
      */
     public static Flowable<BaseResponse<IOUBriefMoney>> getBriefMoneyIOUByJusticeId(String justiceId) {
         return getService().getBriefMoneyIOUByJusticeId(justiceId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 解析短连接
+     *
+     * @param shortUrl
+     * @return
+     */
+    public static Flowable<BaseResponse<String>> parseShortUrl(String shortUrl) {
+        shortUrl += "?type=1";
+        return getService().parseShortUrl(shortUrl).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
 
