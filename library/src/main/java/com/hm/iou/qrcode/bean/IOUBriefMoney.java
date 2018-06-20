@@ -2,141 +2,92 @@ package com.hm.iou.qrcode.bean;
 
 import java.io.Serializable;
 
+/**
+ * Created by AFinalStone on 2018/1/22.
+ */
 public class IOUBriefMoney implements Serializable {
 
 
     /**
-     * id : 44611e5a891645abab18a770e0e48ac1
-     * createTime : 0
-     * borrowerName : 石要磊
-     * loanerName : *方超
-     * scheduleReturnDate : 1522857600000
-     * amount : 66544
-     * interest : 0
-     * borrowerRecvWay : AliPay
-     * borrowerAccount : 557**
-     * loanerAccount : y76**
-     * transDeadLine : 0
-     * valueDate : 0
-     * expiryDate4Interest : 0
-     * amountStr : 6*****
+     * id : 8417339447a043eebc9c531fd7448e21
+     * iouKind : 1
+     * thingsName : null
+     * thingsType : null
+     * brokerageName : null
+     * senderName : null
+     * opDate : null
+     * memo : null
      */
+    private String id;
+    private int iouKind;
+    private String thingsName;
+    private int thingsType;
+    private String brokerageName;
+    private String senderName;
+    private String opDate;
+    private String memo;
 
-     String id;
-     int createTime;
-     String borrowerName;
-     String loanerName;
-     long scheduleReturnDate;
-     int amount;
-     int interest;
-     String borrowerRecvWay;
-     String borrowerAccount;
-     String loanerAccount;
-     int transDeadLine;
-     int valueDate;
-     int expiryDate4Interest;
+    public String getId() {
+        return id;
+    }
 
- public String getId() {
-  return id;
- }
+    public void setId(String id) {
+        this.id = id;
+    }
 
- public void setId(String id) {
-  this.id = id;
- }
+    public int getIouKind() {
+        return iouKind;
+    }
 
- public int getCreateTime() {
-  return createTime;
- }
+    public void setIouKind(int iouKind) {
+        this.iouKind = iouKind;
+    }
 
- public void setCreateTime(int createTime) {
-  this.createTime = createTime;
- }
+    public String getThingsName() {
+        return thingsName;
+    }
 
- public String getBorrowerName() {
-  return borrowerName;
- }
+    public void setThingsName(String thingsName) {
+        this.thingsName = thingsName;
+    }
 
- public void setBorrowerName(String borrowerName) {
-  this.borrowerName = borrowerName;
- }
+    public int getThingsType() {
+        return thingsType;
+    }
 
- public String getLoanerName() {
-  return loanerName;
- }
+    public void setThingsType(int thingsType) {
+        this.thingsType = thingsType;
+    }
 
- public void setLoanerName(String loanerName) {
-  this.loanerName = loanerName;
- }
+    public String getBrokerageName() {
+        return brokerageName;
+    }
 
- public long getScheduleReturnDate() {
-  return scheduleReturnDate;
- }
+    public void setBrokerageName(String brokerageName) {
+        this.brokerageName = brokerageName;
+    }
 
- public void setScheduleReturnDate(long scheduleReturnDate) {
-  this.scheduleReturnDate = scheduleReturnDate;
- }
+    public String getSenderName() {
+        return senderName;
+    }
 
- public int getAmount() {
-  return amount;
- }
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
 
- public void setAmount(int amount) {
-  this.amount = amount;
- }
+    public String getOpDate() {
+        return opDate;
+    }
 
- public int getInterest() {
-  return interest;
- }
+    public void setOpDate(String opDate) {
+        this.opDate = opDate;
+    }
 
- public void setInterest(int interest) {
-  this.interest = interest;
- }
+    public String getMemo() {
+        return memo;
+    }
 
- public String getBorrowerRecvWay() {
-  return borrowerRecvWay;
- }
-
- public void setBorrowerRecvWay(String borrowerRecvWay) {
-  this.borrowerRecvWay = borrowerRecvWay;
- }
-
- public String getBorrowerAccount() {
-  return borrowerAccount;
- }
-
- public void setBorrowerAccount(String borrowerAccount) {
-  this.borrowerAccount = borrowerAccount;
- }
-
- public String getLoanerAccount() {
-  return loanerAccount;
- }
-
- public void setLoanerAccount(String loanerAccount) {
-  this.loanerAccount = loanerAccount;
- }
-
- public int getTransDeadLine() {
-  return transDeadLine;
- }
-
- public void setTransDeadLine(int transDeadLine) {
-  this.transDeadLine = transDeadLine;
- }
-
- public int getValueDate() {
-  return valueDate;
- }
-
- public void setValueDate(int valueDate) {
-  this.valueDate = valueDate;
- }
-
- public int getExpiryDate4Interest() {
-  return expiryDate4Interest;
- }
-
- public void setExpiryDate4Interest(int expiryDate4Interest) {
-  this.expiryDate4Interest = expiryDate4Interest;
- }
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 }

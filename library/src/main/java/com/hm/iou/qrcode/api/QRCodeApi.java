@@ -24,11 +24,11 @@ public class QRCodeApi {
     /**
      * 通过公正id查询借条是否存在
      *
-     * @param justiceId 借条id
+     * @param justiceId 借条公证id
      * @return
      */
-    public static Flowable<BaseResponse<IOUBriefMoney>> getBriefMoneyIOUByJusticeId(String justiceId) {
-        return getService().getBriefMoneyIOUByJusticeId(justiceId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    public static Flowable<BaseResponse<IOUBriefMoney>> searchIOUById(String justiceId) {
+        return getService().searchIOUById(justiceId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
