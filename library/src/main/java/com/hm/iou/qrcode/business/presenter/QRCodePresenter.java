@@ -122,9 +122,10 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     @Override
     public void judgeData(String qrCodeContent) {
         for (String url : listBeginUrls) {
-            qrCodeContent.startsWith(url);
-            parseUrl(qrCodeContent);
-            return;
+            if (qrCodeContent.startsWith(url)) {
+                parseUrl(qrCodeContent);
+                return;
+            }
         }
         if (PersonalCardPresenter.APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
             SystemUtil.openWebBrowser(mContext, qrCodeContent);
