@@ -121,15 +121,15 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
 
     @Override
     public void judgeData(String qrCodeContent) {
+        if (PersonalCardPresenter.APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
+            SystemUtil.openWebBrowser(mContext, qrCodeContent);
+            return;
+        }
         for (String url : listBeginUrls) {
             if (qrCodeContent.startsWith(url)) {
                 parseUrl(qrCodeContent);
                 return;
             }
-        }
-        if (PersonalCardPresenter.APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
-            SystemUtil.openWebBrowser(mContext, qrCodeContent);
-            return;
         }
         mView.toastMessage("当前版本暂不支持识别其他来源二维码");
     }
