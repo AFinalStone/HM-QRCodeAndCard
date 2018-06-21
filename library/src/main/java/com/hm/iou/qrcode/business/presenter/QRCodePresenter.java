@@ -13,7 +13,9 @@ import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.api.QRCodeApi;
 import com.hm.iou.qrcode.bean.IOUBriefMoney;
 import com.hm.iou.qrcode.business.QRCodeContract;
+import com.hm.iou.router.Router;
 import com.hm.iou.sharedata.model.BaseResponse;
+import com.hm.iou.sharedata.model.IOUKindEnum;
 import com.hm.iou.tools.StringUtil;
 import com.hm.iou.tools.SystemUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -91,6 +93,21 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                     public void handleResult(IOUBriefMoney iouBriefMoney) {
                         mView.dismissLoadingView();
                         //判断出是资金借条，则跳转到资金借条收录的页面
+                        int iouKind = iouBriefMoney.getIouKind();
+                        if (IOUKindEnum.ElecBorrowReceipt.getValue() == iouKind) {
+                            Router.getInstance()
+                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_include/include_elec_borrow")
+                                    .withString("iou_id", iouShowId)
+                                    .navigation(mContext);
+                            return;
+                        }
+                        if (IOUKindEnum.ElecReceiveReceipt.getValue() == iouKind) {
+                            Router.getInstance()
+                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_include/include_elec_receive")
+                                    .withString("iou_id", iouShowId)
+                                    .navigation(mContext);
+                            return;
+                        }
                         NavigationHelper.toMoneyReceiptInclude(mContext, iouShowId);
                     }
 
