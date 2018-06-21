@@ -27,7 +27,8 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
 
     private static final String URL_PARAMETER_PROTOCOL = "protocol";
     private static final String URL_PARAMETER_JUSTID = "justiceId";
-    private static final String PARAMETER_PROTOCOL_TYPE_IOU = "1"; //电子借条
+    private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW = "1"; //电子借条
+    private static final String PARAMETER_PROTOCOL_TYPE_ELEC_RECEIVE = "2"; //电子收条
 
     //    http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
     //允许识别的url
@@ -60,7 +61,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                     public void handleResult(String realCodeContent) {
                         Uri uri = Uri.parse(realCodeContent);
                         String type = uri.getQueryParameter(URL_PARAMETER_PROTOCOL);
-                        if (PARAMETER_PROTOCOL_TYPE_IOU.equals(type)) {
+                        if (PARAMETER_PROTOCOL_TYPE_ELEC_BORROW.equals(type) || PARAMETER_PROTOCOL_TYPE_ELEC_RECEIVE.equals(type)) {
                             //判断是电子借条，进行搜索操作
                             String id = uri.getQueryParameter(URL_PARAMETER_JUSTID);
                             searchData(id);
@@ -95,14 +96,14 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                         int iouKind = iouBriefMoney.getIouKind();
                         if (IOUKindEnum.ElecBorrowReceipt.getValue() == iouKind) {
                             Router.getInstance()
-                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_include/include_elec_borrow")
+                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_search/include_elec_borrow")
                                     .withString("iou_id", iouShowId)
                                     .navigation(mContext);
                             return;
                         }
                         if (IOUKindEnum.ElecReceiveReceipt.getValue() == iouKind) {
                             Router.getInstance()
-                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_include/include_elec_receive")
+                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_search/include_elec_receive")
                                     .withString("iou_id", iouShowId)
                                     .navigation(mContext);
                             return;
