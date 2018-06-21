@@ -82,10 +82,10 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     /**
      * 搜索电子借条/收条
      *
-     * @param iouShowId 电子借条的公证id
+     * @param justiceId 电子借条的公证id
      */
-    private void searchData(final String iouShowId) {
-        QRCodeApi.searchIOUById(iouShowId)
+    private void searchData(final String justiceId) {
+        QRCodeApi.searchIOUById(justiceId)
                 .compose(getProvider().<BaseResponse<IOUBriefMoney>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<IOUBriefMoney>handleResponse())
                 .subscribeWith(new CommSubscriber<IOUBriefMoney>(mView) {
@@ -97,18 +97,18 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                         if (IOUKindEnum.ElecBorrowReceipt.getValue() == iouKind) {
                             Router.getInstance()
                                     .buildWithUrl("hmiou://m.54jietiao.com/iou_search/include_elec_borrow")
-                                    .withString("iou_id", iouShowId)
+                                    .withString("justiceId", justiceId)
                                     .navigation(mContext);
                             return;
                         }
                         if (IOUKindEnum.ElecReceiveReceipt.getValue() == iouKind) {
                             Router.getInstance()
                                     .buildWithUrl("hmiou://m.54jietiao.com/iou_search/include_elec_receive")
-                                    .withString("iou_id", iouShowId)
+                                    .withString("justiceId", justiceId)
                                     .navigation(mContext);
                             return;
                         }
-                        NavigationHelper.toMoneyReceiptInclude(mContext, iouShowId);
+                        NavigationHelper.toMoneyReceiptInclude(mContext, justiceId);
                     }
 
                     @Override

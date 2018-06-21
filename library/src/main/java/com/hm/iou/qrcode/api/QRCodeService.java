@@ -17,7 +17,7 @@ import retrofit2.http.Url;
 public interface QRCodeService {
 
     @GET("/api/iou/front/v1/getIOUByJusticeId")
-    Flowable<BaseResponse<IOUBriefMoney>> searchIOUById(@Query("justiceId") String iouShowId);
+    Flowable<BaseResponse<IOUBriefMoney>> searchIOUById(@Query("justiceId") String justiceId);
 
     @GET
     Flowable<BaseResponse<String>> parseShortUrl(@Url String url);
