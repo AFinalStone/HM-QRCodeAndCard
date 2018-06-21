@@ -48,6 +48,38 @@ public class QRCodeActivity<T extends MvpActivityPresenter> extends BaseActivity
         if (bundle != null) {
             mShowType = bundle.getString(EXTRA_KEY_SHOW_TYPE);
         }
+
+        if (PermissionUtil.isPermissionGranted(this, Manifest.permission.CAMERA)) {
+            toRealQRCodeActivity();
+        } else {
+            PermissionUtil.showCameraRemindDialog(this, new PermissionUtil.OnPermissionDialogClick() {
+                @Override
+                public void onPositiveBtnClick() {
+                    requestCameraPermission();
+                }
+
+                @Override
+                public void onNegativeBtnClick() {
+                    finish();
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_KEY_SHOW_TYPE, mShowType);
+    }
+
+    private void toRealQRCodeActivity() {
+        Intent intent = new Intent(QRCodeActivity.this, RealQRCodeActivity.class);
+        intent.putExtra(EXTRA_KEY_SHOW_TYPE, mShowType);
+        startActivity(intent);
+        finish();
+    }
+
+    private void requestCameraPermission() {
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions.request(Manifest.permission.CAMERA)
                 .subscribe(new Consumer<Boolean>() {
@@ -70,20 +102,6 @@ public class QRCodeActivity<T extends MvpActivityPresenter> extends BaseActivity
                         }
                     }
                 });
-    }
-
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(EXTRA_KEY_SHOW_TYPE, mShowType);
-    }
-
-    private void toRealQRCodeActivity() {
-        Intent intent = new Intent(QRCodeActivity.this, RealQRCodeActivity.class);
-        intent.putExtra(EXTRA_KEY_SHOW_TYPE, mShowType);
-        startActivity(intent);
-        finish();
     }
 
 }
