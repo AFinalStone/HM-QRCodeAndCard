@@ -2,141 +2,94 @@ package com.hm.iou.qrcode.bean;
 
 import java.io.Serializable;
 
+/**
+ * Created by AFinalStone on 2018/1/22.
+ */
+
 public class IOUBriefMoney implements Serializable {
 
 
     /**
-     * id : 44611e5a891645abab18a770e0e48ac1
-     * createTime : 0
+     * iouId : b043c06c4dcc451b81f59e730122410d
+     * iouKind : 1
+     * amount : 1***
      * borrowerName : 石要磊
-     * loanerName : *方超
-     * scheduleReturnDate : 1522857600000
-     * amount : 66544
-     * interest : 0
-     * borrowerRecvWay : AliPay
-     * borrowerAccount : 557**
-     * loanerAccount : y76**
-     * transDeadLine : 0
-     * valueDate : 0
-     * expiryDate4Interest : 0
-     * amountStr : 6*****
+     * borrowerAccount : 602**
+     * loanerName : *磊
+     * loanerAccount : 152**
+     * scheduleReturnDate : 2019.01
      */
 
-     String id;
-     int createTime;
-     String borrowerName;
-     String loanerName;
-     long scheduleReturnDate;
-     int amount;
-     int interest;
-     String borrowerRecvWay;
-     String borrowerAccount;
-     String loanerAccount;
-     int transDeadLine;
-     int valueDate;
-     int expiryDate4Interest;
+    private String iouId;
+    private int iouKind;
+    private String amount;
+    private String borrowerName;
+    private String borrowerAccount;
+    private String loanerName;
+    private String loanerAccount;
+    private String scheduleReturnDate;
 
- public String getId() {
-  return id;
- }
+    public String getIouId() {
+        return iouId;
+    }
 
- public void setId(String id) {
-  this.id = id;
- }
+    public void setIouId(String iouId) {
+        this.iouId = iouId;
+    }
 
- public int getCreateTime() {
-  return createTime;
- }
+    public int getIouKind() {
+        return iouKind;
+    }
 
- public void setCreateTime(int createTime) {
-  this.createTime = createTime;
- }
+    public void setIouKind(int iouKind) {
+        this.iouKind = iouKind;
+    }
 
- public String getBorrowerName() {
-  return borrowerName;
- }
+    public String getAmount() {
+        return amount;
+    }
 
- public void setBorrowerName(String borrowerName) {
-  this.borrowerName = borrowerName;
- }
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
 
- public String getLoanerName() {
-  return loanerName;
- }
+    public String getBorrowerName() {
+        return borrowerName;
+    }
 
- public void setLoanerName(String loanerName) {
-  this.loanerName = loanerName;
- }
+    public void setBorrowerName(String borrowerName) {
+        this.borrowerName = borrowerName;
+    }
 
- public long getScheduleReturnDate() {
-  return scheduleReturnDate;
- }
+    public String getBorrowerAccount() {
+        return borrowerAccount;
+    }
 
- public void setScheduleReturnDate(long scheduleReturnDate) {
-  this.scheduleReturnDate = scheduleReturnDate;
- }
+    public void setBorrowerAccount(String borrowerAccount) {
+        this.borrowerAccount = borrowerAccount;
+    }
 
- public int getAmount() {
-  return amount;
- }
+    public String getLoanerName() {
+        return loanerName;
+    }
 
- public void setAmount(int amount) {
-  this.amount = amount;
- }
+    public void setLoanerName(String loanerName) {
+        this.loanerName = loanerName;
+    }
 
- public int getInterest() {
-  return interest;
- }
+    public String getLoanerAccount() {
+        return loanerAccount;
+    }
 
- public void setInterest(int interest) {
-  this.interest = interest;
- }
+    public void setLoanerAccount(String loanerAccount) {
+        this.loanerAccount = loanerAccount;
+    }
 
- public String getBorrowerRecvWay() {
-  return borrowerRecvWay;
- }
+    public String getScheduleReturnDate() {
+        return scheduleReturnDate;
+    }
 
- public void setBorrowerRecvWay(String borrowerRecvWay) {
-  this.borrowerRecvWay = borrowerRecvWay;
- }
-
- public String getBorrowerAccount() {
-  return borrowerAccount;
- }
-
- public void setBorrowerAccount(String borrowerAccount) {
-  this.borrowerAccount = borrowerAccount;
- }
-
- public String getLoanerAccount() {
-  return loanerAccount;
- }
-
- public void setLoanerAccount(String loanerAccount) {
-  this.loanerAccount = loanerAccount;
- }
-
- public int getTransDeadLine() {
-  return transDeadLine;
- }
-
- public void setTransDeadLine(int transDeadLine) {
-  this.transDeadLine = transDeadLine;
- }
-
- public int getValueDate() {
-  return valueDate;
- }
-
- public void setValueDate(int valueDate) {
-  this.valueDate = valueDate;
- }
-
- public int getExpiryDate4Interest() {
-  return expiryDate4Interest;
- }
-
- public void setExpiryDate4Interest(int expiryDate4Interest) {
-  this.expiryDate4Interest = expiryDate4Interest;
- }
+    public void setScheduleReturnDate(String scheduleReturnDate) {
+        this.scheduleReturnDate = scheduleReturnDate;
+    }
 }

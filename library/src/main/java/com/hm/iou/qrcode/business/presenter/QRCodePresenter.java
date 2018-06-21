@@ -83,7 +83,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
      * @param iouShowId 电子借条的公证id
      */
     private void searchElecBorrowPDF(final String iouShowId) {
-        QRCodeApi.getBriefMoneyIOUByJusticeId(iouShowId)
+        QRCodeApi.searchIOUById(iouShowId)
                 .compose(getProvider().<BaseResponse<IOUBriefMoney>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<IOUBriefMoney>handleResponse())
                 .subscribeWith(new CommSubscriber<IOUBriefMoney>(mView) {

@@ -22,13 +22,15 @@ public class QRCodeApi {
 
 
     /**
-     * 通过公正id查询借条是否存在
+     * 通过公正id查询电子借条或者电子收条
      *
-     * @param justiceId 借条id
+     * @param iouShowId
      * @return
      */
-    public static Flowable<BaseResponse<IOUBriefMoney>> getBriefMoneyIOUByJusticeId(String justiceId) {
-        return getService().getBriefMoneyIOUByJusticeId(justiceId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    public static Flowable<BaseResponse<IOUBriefMoney>> searchIOUById(String iouShowId) {
+        return getService().searchIOUById(iouShowId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
