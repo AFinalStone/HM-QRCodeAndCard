@@ -63,7 +63,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                         if (PARAMETER_PROTOCOL_TYPE_IOU.equals(type)) {
                             //判断是电子借条，进行搜索操作
                             String id = uri.getQueryParameter(URL_PARAMETER_JUSTID);
-                            searchElecBorrowPDF(id);
+                            searchData(id);
                             return;
                         }
                         mView.dismissLoadingView();
@@ -73,18 +73,17 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                     @Override
                     public void handleException(Throwable throwable, String s, String s1) {
                         mView.dismissLoadingView();
-                        mView.toastMessage("当前版本暂不支持该功能");
                     }
                 });
 
     }
 
     /**
-     * 搜索电子借条PDF
+     * 搜索电子借条/收条
      *
      * @param iouShowId 电子借条的公证id
      */
-    private void searchElecBorrowPDF(final String iouShowId) {
+    private void searchData(final String iouShowId) {
         QRCodeApi.searchIOUById(iouShowId)
                 .compose(getProvider().<BaseResponse<IOUBriefMoney>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<IOUBriefMoney>handleResponse())
