@@ -3,6 +3,7 @@ package com.hm.iou.qrcode.business.presenter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
@@ -121,12 +122,15 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
 
     @Override
     public void judgeData(String qrCodeContent) {
+        if (TextUtils.isEmpty(qrCodeContent)) {
+            return;
+        }
         if (PersonalCardPresenter.APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
             SystemUtil.openWebBrowser(mContext, qrCodeContent);
             return;
         }
         for (String url : listBeginUrls) {
-            if (qrCodeContent.startsWith(url)) {
+            if (qrCodeContent.startsWith(url) || qrCodeContent.startsWith(url.replace("https", "http"))) {
                 parseUrl(qrCodeContent);
                 return;
             }
