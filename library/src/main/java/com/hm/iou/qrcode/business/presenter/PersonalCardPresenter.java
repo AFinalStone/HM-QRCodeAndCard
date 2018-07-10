@@ -19,7 +19,7 @@ import com.hm.iou.tools.StringUtil;
 public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardContract.View> implements PersonalCardContract.Presenter {
 
     //个人名片二维码暂时使用借条管家官网代替
-    public static final String APP_OFFICIAL_WEBSITE_URL = "http://54jietiao.com/m-index.html";
+    public static final String APP_OFFICIAL_WEBSITE_URL = "https://www.54jietiao.com";
 
     private UserManager mUserManager;
 
@@ -53,9 +53,9 @@ public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardCont
         //姓名和ID
         String userNameAndId;
         if (isCClass(customerTypeEnum)) {
-            userNameAndId = mContext.getString(R.string.qrcode_not_authentication) + " | " + userId;
+            userNameAndId = mContext.getString(R.string.qrcode_not_authentication) + "  ID:" + userId;
         } else {
-            userNameAndId = mContext.getString(R.string.qrcode_authentication) + userName + " | " + userId;
+            userNameAndId = mContext.getString(R.string.qrcode_authentication) + userName + "  ID:" + userId;
         }
         mView.setUserNameAndID(userNameAndId);
         //头像

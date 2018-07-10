@@ -50,6 +50,11 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
     };
 
     @Override
+    protected void initStatusBarDarkFont(boolean isDarkFont) {
+        super.initStatusBarDarkFont(false);
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.qrcode_activity_scan_code;
     }

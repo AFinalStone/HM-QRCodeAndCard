@@ -2,6 +2,7 @@ package com.hm.iou.qrcode.demo;
 
 import android.app.Application;
 
+import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.logger.Logger;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.network.HttpRequestConfig;
@@ -16,7 +17,10 @@ public class QRCodeApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        BaseBizAppLike appLike = new BaseBizAppLike();
+        appLike.onCreate(this);
+        appLike.initServer("http://192.168.1.254", "http://192.168.1.254",
+                "http://192.168.1.254");
         Logger.init(this, true);
         initNetwork();
     }
