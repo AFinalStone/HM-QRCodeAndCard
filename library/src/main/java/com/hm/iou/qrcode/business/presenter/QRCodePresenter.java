@@ -17,7 +17,6 @@ import com.hm.iou.qrcode.business.QRCodeContract;
 import com.hm.iou.router.Router;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.IOUKindEnum;
-import com.hm.iou.tools.StringUtil;
 import com.hm.iou.tools.SystemUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -26,17 +25,22 @@ import java.util.List;
 
 public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> implements QRCodeContract.Presenter {
 
+    //个人名片二维码暂时使用借条管家官网代替
+    private String APP_OFFICIAL_WEBSITE_URL;
+
     private static final String URL_PARAMETER_PROTOCOL = "protocol";
     private static final String URL_PARAMETER_JUSTID = "justiceId";
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW = "1"; //电子借条
+
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_RECEIVE = "2"; //电子收条
 
-    //    http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
+    //http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
     //允许识别的url
     private List<String> listBeginUrls = new ArrayList<>();
 
     public QRCodePresenter(@NonNull Context context, @NonNull QRCodeContract.View view) {
         super(context, view);
+        APP_OFFICIAL_WEBSITE_URL = context.getString(R.string.base_official_website_url);
         listBeginUrls.add(BaseBizAppLike.getInstance().getApiServer());
         listBeginUrls.add(BaseBizAppLike.getInstance().getFileServer());
         listBeginUrls.add(BaseBizAppLike.getInstance().getH5Server());
@@ -125,7 +129,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
         if (TextUtils.isEmpty(qrCodeContent)) {
             return;
         }
-        if (PersonalCardPresenter.APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
+        if (APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
             SystemUtil.openWebBrowser(mContext, qrCodeContent);
             return;
         }
