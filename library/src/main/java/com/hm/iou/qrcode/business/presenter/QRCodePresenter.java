@@ -25,7 +25,7 @@ import java.util.List;
 
 public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> implements QRCodeContract.Presenter {
 
-    //个人名片二维码暂时使用借条管家官网代替
+    //个人名片二维码暂时使用条管家官网代替
     private String APP_OFFICIAL_WEBSITE_URL;
 
     private static final String URL_PARAMETER_PROTOCOL = "protocol";
