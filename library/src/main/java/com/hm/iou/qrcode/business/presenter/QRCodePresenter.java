@@ -101,14 +101,14 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                         int iouKind = iouBriefMoney.getIouKind();
                         if (IOUKindEnum.ElecBorrowReceipt.getValue() == iouKind) {
                             Router.getInstance()
-                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_search/include_elec_borrow")
+                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_search/get_elec_borrow")
                                     .withString("justiceId", justiceId)
                                     .navigation(mContext);
                             return;
                         }
                         if (IOUKindEnum.ElecReceiveReceipt.getValue() == iouKind) {
                             Router.getInstance()
-                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_search/include_elec_receive")
+                                    .buildWithUrl("hmiou://m.54jietiao.com/iou_search/get_elec_receive")
                                     .withString("justiceId", justiceId)
                                     .navigation(mContext);
                             return;
