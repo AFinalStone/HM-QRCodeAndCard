@@ -39,7 +39,7 @@ allprojects {
 
 | 页面 | 路由url | 备注 |
 | ------ | ------ | ------ |
-| 扫码和个人名片页面 | hmiou://m.54jietiao.com/qrcode/index?show_type=*| 参数show_type为"show_my_card"，页面默认显示个人名片；参数show_type为"show_scan_code"，默认显示扫码页面|
+| 扫码和个人名片页面 | ```hmiou://m.54jietiao.com/qrcode/index?show_type=*```| 参数show_type为"show_my_card"，页面默认显示个人名片；参数show_type为"show_scan_code"，默认显示扫码页面|
 
 路由文件
 
