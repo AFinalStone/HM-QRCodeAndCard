@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickParseLongUrl(View view) {
         String url = "http://api.54jietiao.com/api/base/ref/fzAL6";
         QRCodeApi.parseShortUrl(url)
-                .map(RxUtil.handleResponse())
+                .map(RxUtil.<String>handleResponse())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String realUrl) throws Exception {
