@@ -9,6 +9,7 @@ import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.qrcode.NavigationHelper;
 import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.api.QRCodeApi;
@@ -119,6 +120,9 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                     @Override
                     public void handleException(Throwable throwable, String code, String msg) {
                         mView.dismissLoadingView();
+                        if (!TextUtils.isEmpty(code)) {
+                            TraceUtil.onEvent(mContext, "card_scan_fail_count");
+                        }
                     }
 
                 });

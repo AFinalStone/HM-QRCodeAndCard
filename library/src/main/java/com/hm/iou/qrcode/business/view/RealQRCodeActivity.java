@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.hm.iou.base.BaseActivity;
+import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.R2;
 import com.hm.iou.qrcode.business.QRCodeContract;
@@ -90,8 +91,10 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
     @OnClick({R2.id.ll_sweepCode, R2.id.ll_myCard})
     public void onClick(View view) {
         if (R.id.ll_sweepCode == view.getId()) {
+            TraceUtil.onEvent(mContext, "card_page_scan");
             showScanCodeFragment();
         } else if (R.id.ll_myCard == view.getId()) {
+            TraceUtil.onEvent(mContext, "card_page_card");
             showMyCardFragment();
         }
     }
