@@ -19,8 +19,8 @@ public class QRCodeApplication extends Application {
         super.onCreate();
         BaseBizAppLike appLike = new BaseBizAppLike();
         appLike.onCreate(this);
-        appLike.initServer("http://192.168.1.254", "http://192.168.1.254",
-                "http://192.168.1.254");
+        appLike.initServer("http://192.168.1.217", "http://192.168.1.217",
+                "http://192.168.1.217");
         Logger.init(this, true);
         initNetwork();
     }
@@ -32,7 +32,7 @@ public class QRCodeApplication extends Application {
                 .setAppChannel("yyb")
                 .setAppVersion("1.0.2")
                 .setDeviceId("123abc123")
-                .setBaseUrl("http://192.168.1.254")
+                .setBaseUrl("http://192.168.1.217")
                 .build();
         HttpReqManager.init(config);
     }
