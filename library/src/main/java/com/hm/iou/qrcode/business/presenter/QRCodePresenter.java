@@ -17,11 +17,16 @@ import com.hm.iou.qrcode.api.QRCodeApi;
 import com.hm.iou.qrcode.bean.IOUBriefMoney;
 import com.hm.iou.qrcode.business.QRCodeContract;
 import com.hm.iou.router.Router;
+import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.IOUKindEnum;
 import com.hm.iou.tools.SystemUtil;
 import com.hm.iou.tools.ToastUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +46,13 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
 
     public QRCodePresenter(@NonNull Context context, @NonNull QRCodeContract.View view) {
         super(context, view);
+        EventBus.getDefault().register(this);
         APP_OFFICIAL_WEBSITE_URL = context.getString(R.string.base_official_website_url);
     }
 
     @Override
     public void onDestroy() {
-
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -149,5 +155,16 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
         parseUrl(qrCodeContent);
     }
 
+    /**
+     * 获取到用户收录成功的事件，关闭当前页面
+     *
+     * @param commBizEvent
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvenLoginSuccess(CommBizEvent commBizEvent) {
+        if ("IOUSearch_includeSuccess".equals(commBizEvent.key)) {
+            mView.closeCurrPage();
+        }
+    }
 
 }
