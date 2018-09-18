@@ -24,11 +24,13 @@ public class NavigationHelper {
      * 扫码之后跳转到确认登录页
      *
      * @param context
-     * @param url
+     * @param ip
+     * @param uuid
      */
-    public static void toConfirmLoginActivity(Context context, String url) {
+    public static void toConfirmLoginActivity(Context context, String ip, String uuid) {
         Intent intent = new Intent(context, QRCodeConfirmLoginActivity.class);
-        intent.putExtra(QRCodeConfirmLoginActivity.EXTRA_KEY_URL, url);
+        intent.putExtra(QRCodeConfirmLoginActivity.EXTRA_KEY_IP, ip);
+        intent.putExtra(QRCodeConfirmLoginActivity.EXTRA_KEY_UUID, uuid);
         context.startActivity(intent);
     }
 

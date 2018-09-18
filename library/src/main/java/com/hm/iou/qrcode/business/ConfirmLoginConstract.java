@@ -13,7 +13,7 @@ public interface ConfirmLoginConstract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
-        void doConfirmLogin(String url);
+        void doConfirmLogin(String ip, String uuid);
 
     }
 

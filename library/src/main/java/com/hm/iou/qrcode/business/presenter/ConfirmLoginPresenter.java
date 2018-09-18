@@ -19,9 +19,9 @@ public class ConfirmLoginPresenter extends MvpActivityPresenter<ConfirmLoginCons
     }
 
     @Override
-    public void doConfirmLogin(String url) {
+    public void doConfirmLogin(String ip, String uuid) {
         mView.showLoadingView();
-        QRCodeApi.doConfirmLogin(url)
+        QRCodeApi.doConfirmLogin(ip, uuid)
                 .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
                 .map(RxUtil.<String>handleResponse())
                 .subscribeWith(new CommSubscriber<String>(mView) {

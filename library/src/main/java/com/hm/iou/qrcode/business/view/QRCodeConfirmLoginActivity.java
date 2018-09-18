@@ -14,9 +14,11 @@ import com.hm.iou.qrcode.business.presenter.ConfirmLoginPresenter;
 
 public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresenter> implements ConfirmLoginConstract.View, View.OnClickListener{
 
-    public static final String EXTRA_KEY_URL = "url";
+    public static final String EXTRA_KEY_IP = "ip";
+    public static final String EXTRA_KEY_UUID = "uuid";
 
-    private String mUrl;
+    private String mIp;
+    private String mUuid;
 
     @Override
     protected int getLayoutId() {
@@ -30,9 +32,11 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
 
     @Override
     protected void initEventAndData(Bundle bundle) {
-        mUrl = getIntent().getStringExtra(EXTRA_KEY_URL);
-        if (mUrl == null && bundle != null) {
-            mUrl = bundle.getString(EXTRA_KEY_URL);
+        mIp = getIntent().getStringExtra(EXTRA_KEY_IP);
+        mUuid = getIntent().getStringExtra(EXTRA_KEY_UUID);
+        if (mUuid == null && bundle != null) {
+            mIp = bundle.getString(EXTRA_KEY_IP);
+            mUuid = bundle.getString(EXTRA_KEY_UUID);
         }
 
         findViewById(R.id.tv_login_close).setOnClickListener(this);
@@ -43,7 +47,8 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(EXTRA_KEY_URL, mUrl);
+        outState.putString(EXTRA_KEY_IP, mIp);
+        outState.putString(EXTRA_KEY_UUID, mUuid);
     }
 
     @Override
@@ -53,7 +58,7 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
         } else if (v.getId() == R.id.btn_confirm_cancel) {
             finish();
         } else if (v.getId() == R.id.btn_confirm_login) {
-            mPresenter.doConfirmLogin(mUrl);
+            mPresenter.doConfirmLogin(mIp, mUuid);
         }
     }
 

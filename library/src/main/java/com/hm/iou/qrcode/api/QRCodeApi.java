@@ -46,11 +46,12 @@ public class QRCodeApi {
     /**
      * APP扫码后确认登录
      *
-     * @param url
+     * @param ip
+     * @param uuid
      * @return
      */
-    public static Flowable<BaseResponse<String>> doConfirmLogin(String url) {
-        return getService().doConfirmLogin(url).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    public static Flowable<BaseResponse<String>> doConfirmLogin(String ip, String uuid) {
+        return getService().doConfirmLogin(ip, uuid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
 }

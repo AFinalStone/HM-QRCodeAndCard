@@ -139,7 +139,7 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
     }
 
     @Override
-    public void toQRCodeLoginConfirmPage(String url) {
-        NavigationHelper.toConfirmLoginActivity(this, url);
+    public void toQRCodeLoginConfirmPage(String ip, String uuid) {
+        NavigationHelper.toConfirmLoginActivity(this, ip, uuid);
     }
 }

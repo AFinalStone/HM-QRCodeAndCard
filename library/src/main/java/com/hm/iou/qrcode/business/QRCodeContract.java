@@ -14,9 +14,10 @@ public interface QRCodeContract {
         /**
          * 跳转到二维码登录确认页面
          *
-         * @param url 扫描之后的url信息，APP再调用该url
+         * @param ip
+         * @param uuid
          */
-        void toQRCodeLoginConfirmPage(String url);
+        void toQRCodeLoginConfirmPage(String ip, String uuid);
     }
 
     interface Presenter extends BaseContract.BasePresenter {

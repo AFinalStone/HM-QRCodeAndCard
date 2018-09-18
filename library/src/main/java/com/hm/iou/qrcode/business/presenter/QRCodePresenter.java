@@ -74,8 +74,10 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                         }
 
                         if (PARAMETER_PROTOCOL_TYPE_QRCODE_LOGIN.equals(type)) {
+                            String ip = uri.getQueryParameter("i");
+                            String uuid = uri.getQueryParameter("u");
                             mView.dismissLoadingView();
-                            mView.toQRCodeLoginConfirmPage(realCodeContent);
+                            mView.toQRCodeLoginConfirmPage(ip, uuid);
                             return;
                         }
 
