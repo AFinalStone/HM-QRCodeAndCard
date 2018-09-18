@@ -9,12 +9,14 @@ public interface ConfirmLoginConstract {
 
     interface View extends BaseContract.BaseView {
 
+        void updateCountDownText(String text);
     }
 
     interface Presenter extends BaseContract.BasePresenter {
 
         void doConfirmLogin(String ip, String uuid);
 
+        void startCountDown();
     }
 
 }

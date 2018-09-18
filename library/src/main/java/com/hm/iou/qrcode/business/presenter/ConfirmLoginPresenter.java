@@ -11,8 +11,15 @@ import com.hm.iou.qrcode.business.ConfirmLoginConstract;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 public class ConfirmLoginPresenter extends MvpActivityPresenter<ConfirmLoginConstract.View> implements ConfirmLoginConstract.Presenter {
 
+    private static final int COUNT_DOWN_SEC = 45;
 
     public ConfirmLoginPresenter(@NonNull Context context, @NonNull ConfirmLoginConstract.View view) {
         super(context, view);
@@ -35,6 +42,32 @@ public class ConfirmLoginPresenter extends MvpActivityPresenter<ConfirmLoginCons
                     @Override
                     public void handleException(Throwable throwable, String code, String msg) {
                         mView.dismissLoadingView();
+                    }
+                });
+    }
+
+    @Override
+    public void startCountDown() {
+        mView.updateCountDownText(String.format("(%dS)", COUNT_DOWN_SEC));
+        Flowable.interval(1, 1, TimeUnit.SECONDS)
+                .take(COUNT_DOWN_SEC)
+                .compose(getProvider().<Long>bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new CommSubscriber<Long>(mView) {
+                    @Override
+                    public void handleResult(Long aLong) {
+                        System.out.println("count down: " + aLong);
+                        mView.updateCountDownText((COUNT_DOWN_SEC - aLong - 1) + "S");
+                        mView.updateCountDownText(String.format("(%dS)", COUNT_DOWN_SEC - aLong - 1));
+                        if (aLong == COUNT_DOWN_SEC - 1) {
+                            mView.closeCurrPage();
+                        }
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+
                     }
                 });
     }

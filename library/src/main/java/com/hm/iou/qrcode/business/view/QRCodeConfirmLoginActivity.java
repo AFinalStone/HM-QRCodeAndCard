@@ -2,6 +2,7 @@ package com.hm.iou.qrcode.business.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.qrcode.R;
@@ -19,6 +20,8 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
 
     private String mIp;
     private String mUuid;
+
+    private TextView mTvCountDown;
 
     @Override
     protected int getLayoutId() {
@@ -39,9 +42,11 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
             mUuid = bundle.getString(EXTRA_KEY_UUID);
         }
 
+        mTvCountDown = findViewById(R.id.tv_login_countdown);
         findViewById(R.id.tv_login_close).setOnClickListener(this);
         findViewById(R.id.btn_confirm_cancel).setOnClickListener(this);
         findViewById(R.id.btn_confirm_login).setOnClickListener(this);
+        mPresenter.startCountDown();
     }
 
     @Override
@@ -62,4 +67,8 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
         }
     }
 
+    @Override
+    public void updateCountDownText(String text) {
+        mTvCountDown.setText(text);
+    }
 }
