@@ -33,4 +33,12 @@
         android:onClick="onClickLogin"
         android:text="登录" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="toConfirmLogin"
+        android:text="扫码后确认登录页" />
+
+
 </LinearLayout>

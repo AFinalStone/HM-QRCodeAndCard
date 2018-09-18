@@ -19,7 +19,7 @@ public class QRCodeApplication extends Application {
         super.onCreate();
         BaseBizAppLike appLike = new BaseBizAppLike();
         appLike.onCreate(this);
-        appLike.initServer("http://192.168.1.217", "http://192.168.1.217",
+        appLike.initServer("http://192.168.1.254:8071", "http://192.168.1.217",
                 "http://192.168.1.217");
         Logger.init(this, true);
         initNetwork();

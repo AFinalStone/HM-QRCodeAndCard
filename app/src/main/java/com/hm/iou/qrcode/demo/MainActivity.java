@@ -8,6 +8,7 @@ import android.view.View;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.demo.R;
 import com.hm.iou.network.HttpReqManager;
+import com.hm.iou.qrcode.NavigationHelper;
 import com.hm.iou.qrcode.api.QRCodeApi;
 import com.hm.iou.qrcode.business.view.QRCodeActivity;
 import com.hm.iou.sharedata.UserManager;
@@ -52,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view) {
-        String pwd = Md5Util.getMd5ByString("123456");
+        String pwd = Md5Util.getMd5ByString("111111");
         MobileLoginReqBean reqBean = new MobileLoginReqBean();
-        reqBean.setMobile("15267163669");
+        reqBean.setMobile("15967132742");
         reqBean.setQueryPswd(pwd);
         HttpReqManager.getInstance().getService(LoginService.class)
                 .mobileLogin(reqBean)
@@ -93,7 +94,10 @@ public class MainActivity extends AppCompatActivity {
                         ToastUtil.showMessage(MainActivity.this, throwable.getMessage());
                     }
                 });
-
-
     }
+
+    public void toConfirmLogin(View view) {
+        NavigationHelper.toConfirmLoginActivity(this, "http://www.54jietiao.com");
+    }
+
 }

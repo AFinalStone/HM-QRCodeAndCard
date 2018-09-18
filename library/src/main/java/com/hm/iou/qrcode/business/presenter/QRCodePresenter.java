@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
@@ -21,15 +20,11 @@ import com.hm.iou.sharedata.event.CommBizEvent;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.IOUKindEnum;
 import com.hm.iou.tools.SystemUtil;
-import com.hm.iou.tools.ToastUtil;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> implements QRCodeContract.Presenter {
 
@@ -38,9 +33,10 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
 
     private static final String URL_PARAMETER_PROTOCOL = "protocol";
     private static final String URL_PARAMETER_JUSTID = "justiceId";
-    private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW = "1"; //电子借条
 
-    private static final String PARAMETER_PROTOCOL_TYPE_ELEC_RECEIVE = "2"; //电子收条
+    private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW = "1";      //电子借条
+    private static final String PARAMETER_PROTOCOL_TYPE_ELEC_RECEIVE = "2";     //电子收条
+    private static final String PARAMETER_PROTOCOL_TYPE_QRCODE_LOGIN = "3";     //官网二维码扫描登录
 
     //http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
 
@@ -76,6 +72,13 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                             searchData(id);
                             return;
                         }
+
+                        if (PARAMETER_PROTOCOL_TYPE_QRCODE_LOGIN.equals(type)) {
+                            mView.dismissLoadingView();
+                            mView.toQRCodeLoginConfirmPage(realCodeContent);
+                            return;
+                        }
+
                         mView.dismissLoadingView();
                         mView.toastMessage("当前版本暂不支持该功能");
                     }

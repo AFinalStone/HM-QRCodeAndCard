@@ -11,6 +11,12 @@ public interface QRCodeContract {
 
     interface View extends BaseContract.BaseView {
 
+        /**
+         * 跳转到二维码登录确认页面
+         *
+         * @param url 扫描之后的url信息，APP再调用该url
+         */
+        void toQRCodeLoginConfirmPage(String url);
     }
 
     interface Presenter extends BaseContract.BasePresenter {

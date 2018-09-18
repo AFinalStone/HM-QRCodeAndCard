@@ -7,7 +7,6 @@ import com.hm.iou.sharedata.model.BaseResponse;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
 
 
 /**
@@ -40,9 +39,18 @@ public class QRCodeApi {
      * @return
      */
     public static Flowable<BaseResponse<String>> parseShortUrl(String shortUrl) {
-        shortUrl += "?type=1";
+        shortUrl += "?type=1";      //type = 1，表示请求来自APP
         return getService().parseShortUrl(shortUrl).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * APP扫码后确认登录
+     *
+     * @param url
+     * @return
+     */
+    public static Flowable<BaseResponse<String>> doConfirmLogin(String url) {
+        return getService().doConfirmLogin(url).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
 
 }

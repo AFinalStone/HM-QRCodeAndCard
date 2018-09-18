@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffffff"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        android:layout_marginTop="24dip"
+        >
+
+        <TextView
+            android:id="@+id/tv_login_close"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:minWidth="48dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:text="关闭"
+            android:textColor="@color/uikit_title_right_text"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_login_divider"
+        style="@style/UikitDivider.Horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_login_divider"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/qrcode_confirm_login" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="网页登录确认"
+            android:textColor="#ff38383a"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/btn_confirm_login"
+            style="@style/UikitButton"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="80dip"
+            android:layout_marginRight="80dip"
+            android:textSize="18dip"
+            android:text="登录"
+            />
+
+        <TextView
+            android:id="@+id/btn_confirm_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消登录"
+            android:textColor="#ff77777b"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="15dip"
+            android:padding="10dip"
+            />
+        
+    </LinearLayout>
+
+</LinearLayout>

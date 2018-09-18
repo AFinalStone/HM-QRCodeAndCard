@@ -7,11 +7,17 @@
             android:name=".business.view.RealQRCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".business.view.QRCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/UikitTranslucentThemeActivity" />
+
+        <activity
+            android:name=".business.view.QRCodeConfirmLoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
 
     </application>
 

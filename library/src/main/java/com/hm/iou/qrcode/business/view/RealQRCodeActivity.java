@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.hm.iou.base.BaseActivity;
 import com.hm.iou.base.utils.TraceUtil;
+import com.hm.iou.qrcode.NavigationHelper;
 import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.R2;
 import com.hm.iou.qrcode.business.QRCodeContract;
@@ -135,5 +136,10 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
             tx.show(newFragment); // 隐藏当前的fragment，显示下一个
         }
         tx.commit();
+    }
+
+    @Override
+    public void toQRCodeLoginConfirmPage(String url) {
+        NavigationHelper.toConfirmLoginActivity(this, url);
     }
 }
