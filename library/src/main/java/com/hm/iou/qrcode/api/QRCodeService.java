@@ -20,7 +20,7 @@ public interface QRCodeService {
     @GET
     Flowable<BaseResponse<String>> parseShortUrl(@Url String url);
 
-    @GET("/web/user/v1/loginByQrcode/scan")
+    @GET("/auth/web/user/v1/loginByQrcode/scan")
     Flowable<BaseResponse<String>> doConfirmLogin(@Query("i") String ip, @Query("u") String uuid);
 
 }
