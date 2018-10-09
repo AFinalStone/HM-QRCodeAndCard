@@ -21,7 +21,8 @@
             android:layout_height="36dp"
             android:paddingLeft="21dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/uikit_ic_menu_back_white_circle" />
+            android:src="@mipmap/uikit_icon_close_white_01"
+            />
 
         <View
             android:layout_width="0dp"

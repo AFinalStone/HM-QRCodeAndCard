@@ -35,6 +35,8 @@ public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardCont
     }
 
     public static boolean isCClass(int userType) {
+        if (userType == 0)
+            return true;
         if (userType == CustomerTypeEnum.CSub.getValue() || userType == CustomerTypeEnum.CPlus.getValue())
             return true;
         return false;
@@ -44,9 +46,9 @@ public class PersonalCardPresenter extends MvpFragmentPresenter<PersonalCardCont
     public void getUserInfo() {
         UserInfo userDataBean = mUserManager.getUserInfo();
         int customerTypeEnum = userDataBean.getType();
-        String nickName = userDataBean.getNickName();
-        String userName = userDataBean.getName();
-        String userId = userDataBean.getShowId();
+        String nickName = StringUtil.getUnnullString(userDataBean.getNickName());
+        String userName = StringUtil.getUnnullString(userDataBean.getName());
+        String userId = StringUtil.getUnnullString(userDataBean.getShowId());
         String qrCodeUrl = APP_OFFICIAL_WEBSITE_URL;
         //昵称
         mView.setUserNickName(TextUtils.isEmpty(nickName) ? "无" : nickName);
