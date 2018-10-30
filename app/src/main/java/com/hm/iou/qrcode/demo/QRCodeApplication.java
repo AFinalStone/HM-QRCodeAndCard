@@ -32,7 +32,7 @@ public class QRCodeApplication extends Application {
                 .setAppChannel("yyb")
                 .setAppVersion("1.0.2")
                 .setDeviceId("123abc123")
-                .setBaseUrl("http://192.168.1.217")
+                .setBaseUrl("https://api.54jietiao.com")
                 .build();
         HttpReqManager.init(config);
     }

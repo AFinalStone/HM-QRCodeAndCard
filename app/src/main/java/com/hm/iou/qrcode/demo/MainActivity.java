@@ -8,9 +8,9 @@ import android.view.View;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.demo.R;
 import com.hm.iou.network.HttpReqManager;
-import com.hm.iou.qrcode.NavigationHelper;
 import com.hm.iou.qrcode.api.QRCodeApi;
 import com.hm.iou.qrcode.business.view.QRCodeActivity;
+import com.hm.iou.qrcode.business.view.QRCodeConfirmLoginActivity;
 import com.hm.iou.sharedata.UserManager;
 import com.hm.iou.sharedata.model.BaseResponse;
 import com.hm.iou.sharedata.model.UserInfo;
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toConfirmLogin(View view) {
-        NavigationHelper.toConfirmLoginActivity(this, "http://www.54jietiao.com");
+        startActivity(new Intent(this, QRCodeConfirmLoginActivity.class));
     }
 
 }
