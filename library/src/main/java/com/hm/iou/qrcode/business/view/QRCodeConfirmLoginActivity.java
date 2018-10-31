@@ -8,6 +8,7 @@ import com.hm.iou.base.BaseActivity;
 import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.business.ConfirmLoginConstract;
 import com.hm.iou.qrcode.business.presenter.ConfirmLoginPresenter;
+import com.hm.iou.uikit.HMTopBarView;
 
 /**
  * Created by hjy on 2018/9/17.
@@ -40,6 +41,12 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
         if (mUuid == null && bundle != null) {
             mIp = bundle.getString(EXTRA_KEY_IP);
             mUuid = bundle.getString(EXTRA_KEY_UUID);
+        }
+
+        View topBar = findViewById(R.id.ll_topbar);
+        int statusBarHeight = HMTopBarView.getStatusBarHeight(this);
+        if (statusBarHeight > 0) {
+            topBar.setPadding(0, statusBarHeight, 0, 0);
         }
 
         mTvCountDown = findViewById(R.id.tv_login_countdown);
