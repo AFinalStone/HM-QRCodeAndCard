@@ -140,6 +140,16 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
 
     @Override
     public void toQRCodeLoginConfirmPage(String ip, String uuid) {
-        NavigationHelper.toConfirmLoginActivity(this, ip, uuid);
+        NavigationHelper.toConfirmLoginActivity(this, ip, uuid, QRCodeConfirmLoginActivity.TYPE_WEB_LOGIN);
+    }
+
+    @Override
+    public void toBindBackendUser(String ip, String uuid) {
+        NavigationHelper.toConfirmLoginActivity(this, ip, uuid, QRCodeConfirmLoginActivity.TYPE_BACKEND_BIND_USER);
+    }
+
+    @Override
+    public void toBackendLogin(String ip, String uuid) {
+        NavigationHelper.toConfirmLoginActivity(this, ip, uuid, QRCodeConfirmLoginActivity.TYPE_BACKEND_LOGIN);
     }
 }

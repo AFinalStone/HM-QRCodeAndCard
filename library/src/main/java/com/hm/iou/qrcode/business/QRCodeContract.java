@@ -12,12 +12,28 @@ public interface QRCodeContract {
     interface View extends BaseContract.BaseView {
 
         /**
-         * 跳转到二维码登录确认页面
+         * 官网-跳转到二维码登录确认页面
          *
          * @param ip
          * @param uuid
          */
         void toQRCodeLoginConfirmPage(String ip, String uuid);
+
+        /**
+         * 后台管理系统绑定用户
+         *
+         * @param ip
+         * @param uuid
+         */
+        void toBindBackendUser(String ip, String uuid);
+
+        /**
+         * 后台管理系统登录
+         *
+         * @param ip
+         * @param uuid
+         */
+        void toBackendLogin(String ip, String uuid);
     }
 
     interface Presenter extends BaseContract.BasePresenter {

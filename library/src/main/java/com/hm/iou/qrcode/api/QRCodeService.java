@@ -23,4 +23,10 @@ public interface QRCodeService {
     @GET("/auth/web/user/v1/loginByQrcode/scan")
     Flowable<BaseResponse<String>> doConfirmLogin(@Query("i") String ip, @Query("u") String uuid);
 
+    @GET("/api/backenduser/user/v1/backenduserLogin")
+    Flowable<BaseResponse<String>> doBackendLogin(@Query("i") String ip, @Query("u") String uuid);
+
+    @GET("/api/backenduser/user/v1/bindBackendUser")
+    Flowable<BaseResponse<String>> doBindBackendUser(@Query("i") String ip, @Query("u") String uuid);
+
 }

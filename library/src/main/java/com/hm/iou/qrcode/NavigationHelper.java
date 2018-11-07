@@ -26,11 +26,13 @@ public class NavigationHelper {
      * @param context
      * @param ip
      * @param uuid
+     * @param type
      */
-    public static void toConfirmLoginActivity(Context context, String ip, String uuid) {
+    public static void toConfirmLoginActivity(Context context, String ip, String uuid, int type) {
         Intent intent = new Intent(context, QRCodeConfirmLoginActivity.class);
         intent.putExtra(QRCodeConfirmLoginActivity.EXTRA_KEY_IP, ip);
         intent.putExtra(QRCodeConfirmLoginActivity.EXTRA_KEY_UUID, uuid);
+        intent.putExtra(QRCodeConfirmLoginActivity.EXTRA_KEY_LOGIN_TYPE, type);
         context.startActivity(intent);
     }
 

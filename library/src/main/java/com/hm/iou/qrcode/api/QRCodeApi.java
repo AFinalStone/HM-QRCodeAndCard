@@ -54,4 +54,13 @@ public class QRCodeApi {
         return getService().doConfirmLogin(ip, uuid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
+    //后台管理系统登录
+    public static Flowable<BaseResponse<String>> doBackendLogin(String ip, String uuid) {
+        return getService().doBackendLogin(ip, uuid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    //后台管理系统绑定用户
+    public static Flowable<BaseResponse<String>> doBindBackendUser(String ip, String uuid) {
+        return getService().doBindBackendUser(ip, uuid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
 }

@@ -5,7 +5,7 @@ import com.hm.iou.base.mvp.BaseContract;
 /**
  * 确认登录
  */
-public interface ConfirmLoginConstract {
+public interface ConfirmLoginContract {
 
     interface View extends BaseContract.BaseView {
 
@@ -14,7 +14,7 @@ public interface ConfirmLoginConstract {
 
     interface Presenter extends BaseContract.BasePresenter {
 
-        void doConfirmLogin(String ip, String uuid);
+        void doConfirmLogin(String ip, String uuid, int loginType);
 
         void startCountDown();
     }

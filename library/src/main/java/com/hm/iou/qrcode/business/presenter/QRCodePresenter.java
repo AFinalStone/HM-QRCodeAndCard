@@ -37,6 +37,9 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW = "1";      //电子借条
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_RECEIVE = "2";     //电子收条
     private static final String PARAMETER_PROTOCOL_TYPE_QRCODE_LOGIN = "3";     //官网二维码扫描登录
+    private static final String PARAMETER_PROTOCOL_BACK_BIND_USER = "4";        //后台绑定用户
+    private static final String PARAMETER_PROTOCOL_BACK_LOGIN = "5";        //后台登录
+
 
     //http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
 
@@ -80,6 +83,25 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                             mView.toQRCodeLoginConfirmPage(ip, uuid);
                             return;
                         }
+
+                        //后台管理系统-绑定用户
+                        if (PARAMETER_PROTOCOL_BACK_BIND_USER.equals(type)) {
+                            String ip = uri.getQueryParameter("i");
+                            String uuid = uri.getQueryParameter("u");
+                            mView.dismissLoadingView();
+                            mView.toBindBackendUser(ip, uuid);
+                            return;
+                        }
+
+                        //后台管理系统-直接登录
+                        if (PARAMETER_PROTOCOL_BACK_LOGIN.equals(type)) {
+                            String ip = uri.getQueryParameter("i");
+                            String uuid = uri.getQueryParameter("u");
+                            mView.dismissLoadingView();
+                            mView.toBackendLogin(ip, uuid);
+                            return;
+                        }
+
 
                         mView.dismissLoadingView();
                         mView.toastMessage("当前版本暂不支持该功能");
