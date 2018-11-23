@@ -81,6 +81,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                             String uuid = uri.getQueryParameter("u");
                             mView.dismissLoadingView();
                             mView.toQRCodeLoginConfirmPage(ip, uuid);
+                            mView.closeCurrPage();
                             return;
                         }
 
@@ -90,6 +91,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                             String uuid = uri.getQueryParameter("u");
                             mView.dismissLoadingView();
                             mView.toBindBackendUser(ip, uuid);
+                            mView.closeCurrPage();
                             return;
                         }
 
@@ -99,6 +101,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                             String uuid = uri.getQueryParameter("u");
                             mView.dismissLoadingView();
                             mView.toBackendLogin(ip, uuid);
+                            mView.closeCurrPage();
                             return;
                         }
 
@@ -108,9 +111,13 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                     }
 
                     @Override
-                    public void handleException(Throwable throwable, String s, String s1) {
+                    public void handleException(Throwable throwable, String code, String msg) {
                         mView.dismissLoadingView();
-                        mView.toastMessage("条管家无法识别其他来源的二维码");
+                        if (TextUtils.isEmpty(code)) {
+                            mView.toastMessage(msg);
+                        } else {
+                            mView.toastMessage("条管家无法识别其他来源的二维码");
+                        }
                     }
 
                     @Override

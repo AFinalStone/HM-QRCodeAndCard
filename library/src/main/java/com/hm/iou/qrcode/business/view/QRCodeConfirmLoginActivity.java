@@ -2,6 +2,7 @@ package com.hm.iou.qrcode.business.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.hm.iou.base.BaseActivity;
@@ -28,6 +29,8 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
     private String mUuid;
     private int mLoginType;
 
+    private Button mBtnConfirm;
+    private TextView mTvCancel;
     private TextView mTvCountDown;
 
     @Override
@@ -59,8 +62,17 @@ public class QRCodeConfirmLoginActivity extends BaseActivity<ConfirmLoginPresent
 
         mTvCountDown = findViewById(R.id.tv_login_countdown);
         findViewById(R.id.tv_login_close).setOnClickListener(this);
-        findViewById(R.id.btn_confirm_cancel).setOnClickListener(this);
-        findViewById(R.id.btn_confirm_login).setOnClickListener(this);
+        mBtnConfirm = findViewById(R.id.btn_confirm_login);
+        mBtnConfirm.setOnClickListener(this);
+        mTvCancel = findViewById(R.id.btn_confirm_cancel);
+        mTvCancel.setOnClickListener(this);
+
+        if (mLoginType == TYPE_BACKEND_BIND_USER) {
+            mBtnConfirm.setText("绑定");
+            ((TextView)findViewById(R.id.tv_scan_tips)).setText("绑定确认");
+            mTvCancel.setText("取消绑定");
+        }
+
         mPresenter.startCountDown();
     }
 
