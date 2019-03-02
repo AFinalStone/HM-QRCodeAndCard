@@ -6,6 +6,7 @@ import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.logger.Logger;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.network.HttpRequestConfig;
+import com.hm.iou.router.Router;
 
 
 /**
@@ -17,6 +18,7 @@ public class QRCodeApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Router.init(this);
         BaseBizAppLike appLike = new BaseBizAppLike();
         appLike.onCreate(this);
         appLike.initServer("http://192.168.1.217", "http://192.168.1.217",
@@ -32,7 +34,7 @@ public class QRCodeApplication extends Application {
                 .setAppChannel("yyb")
                 .setAppVersion("1.0.2")
                 .setDeviceId("123abc123")
-                .setBaseUrl("https://api.54jietiao.com")
+                .setBaseUrl(BaseBizAppLike.getInstance().getApiServer())
                 .build();
         HttpReqManager.init(config);
     }

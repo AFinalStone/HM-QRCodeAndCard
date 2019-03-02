@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view) {
-        String pwd = Md5Util.getMd5ByString("111111");
+        String pwd = Md5Util.getMd5ByString("123456");
         MobileLoginReqBean reqBean = new MobileLoginReqBean();
-        reqBean.setMobile("15967132742");
+        reqBean.setMobile("13186975702");
         reqBean.setQueryPswd(pwd);
         HttpReqManager.getInstance().getService(LoginService.class)
                 .mobileLogin(reqBean)

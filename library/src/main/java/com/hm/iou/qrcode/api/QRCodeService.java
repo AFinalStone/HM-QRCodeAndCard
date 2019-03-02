@@ -29,4 +29,7 @@ public interface QRCodeService {
     @GET("/api/backenduser/user/v1/bindBackendUser")
     Flowable<BaseResponse<String>> doBindBackendUser(@Query("i") String ip, @Query("u") String uuid);
 
+    @GET("/api/base/scan/v1/scanQrcode")
+    Flowable<BaseResponse<String>> scanQrcodeElecBorrowV2(@Query("content") String content);
+
 }

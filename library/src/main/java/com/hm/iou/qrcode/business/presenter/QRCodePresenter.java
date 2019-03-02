@@ -39,6 +39,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     private static final String PARAMETER_PROTOCOL_TYPE_QRCODE_LOGIN = "3";     //官网二维码扫描登录
     private static final String PARAMETER_PROTOCOL_BACK_BIND_USER = "4";        //后台绑定用户
     private static final String PARAMETER_PROTOCOL_BACK_LOGIN = "5";        //后台登录
+    private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW_V2 = "6";   //电子借条V2.0
 
 
     //http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
@@ -105,6 +106,12 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                             return;
                         }
 
+                        //电子借条V2.0
+                        if (PARAMETER_PROTOCOL_TYPE_ELEC_BORROW_V2.equals(type)) {
+                            scanQrcodeElecBorrowV2(realCodeContent);
+                            return;
+                        }
+
 
                         mView.dismissLoadingView();
                         mView.toastMessage("当前版本暂不支持该功能");
@@ -153,6 +160,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                                     .buildWithUrl("hmiou://m.54jietiao.com/iou_search/get_elec_borrow")
                                     .withString("justiceId", justiceId)
                                     .navigation(mContext);
+                            mView.closeCurrPage();
                             return;
                         }
                         if (IOUKindEnum.ElecReceiveReceipt.getValue() == iouKind) {
@@ -160,9 +168,40 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                                     .buildWithUrl("hmiou://m.54jietiao.com/iou_search/get_elec_receive")
                                     .withString("justiceId", justiceId)
                                     .navigation(mContext);
+                            mView.closeCurrPage();
                             return;
                         }
                         NavigationHelper.toMoneyReceiptInclude(mContext, justiceId);
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String code, String msg) {
+                        mView.dismissLoadingView();
+                        if (!TextUtils.isEmpty(code)) {
+                            TraceUtil.onEvent(mContext, "card_scan_fail_count");
+                        }
+                    }
+
+                });
+    }
+
+    /**
+     * 搜索V2借条
+     *
+     * @param content
+     */
+    private void scanQrcodeElecBorrowV2(String content) {
+        QRCodeApi.scanQrcodeElecBorrowV2(content)
+                .compose(getProvider().<BaseResponse<String>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<String>handleResponse())
+                .subscribeWith(new CommSubscriber<String>(mView) {
+                    @Override
+                    public void handleResult(String url) {
+                        mView.dismissLoadingView();
+                        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/webview/index")
+                                .withString("url", url)
+                                .navigation(mContext);
+                        mView.closeCurrPage();
                     }
 
                     @Override

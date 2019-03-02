@@ -63,4 +63,9 @@ public class QRCodeApi {
     public static Flowable<BaseResponse<String>> doBindBackendUser(String ip, String uuid) {
         return getService().doBindBackendUser(ip, uuid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
+
+    public static Flowable<BaseResponse<String>> scanQrcodeElecBorrowV2(String content) {
+        return getService().scanQrcodeElecBorrowV2(content).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
 }
