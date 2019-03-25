@@ -124,7 +124,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                         if (TextUtils.isEmpty(code)) {
                             mView.toastMessage(msg);
                         } else {
-                            mView.toastMessage("条管家无法识别其他来源的二维码");
+                            mView.showNoSupportQrCode();
                         }
                     }
 
@@ -222,14 +222,12 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
         if (TextUtils.isEmpty(qrCodeContent)) {
             return;
         }
-        if (APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
+        if (qrCodeContent.startsWith(APP_OFFICIAL_WEBSITE_URL)) {
             SystemUtil.openWebBrowser(mContext, qrCodeContent);
             return;
         }
-        Uri uri = Uri.parse(BaseBizAppLike.getInstance().getH5Server());
-        String authority = uri.getAuthority();
-        String scheme = uri.getSchemeSpecificPart();
-        if (!qrCodeContent.startsWith(authority + scheme)) {
+        if (!qrCodeContent.startsWith(BaseBizAppLike.getInstance().getH5Server()) && !qrCodeContent.startsWith(BaseBizAppLike.getInstance().getApiServer())
+                && !qrCodeContent.startsWith(BaseBizAppLike.getInstance().getFileServer())) {
             mView.showNoSupportQrCode();
             return;
         }

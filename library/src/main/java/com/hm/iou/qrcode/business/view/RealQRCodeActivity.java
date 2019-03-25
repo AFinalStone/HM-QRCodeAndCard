@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -37,6 +38,7 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
     LinearLayout mLlMyCard;
 
     private String mShowType;
+    private HMAlertDialog mDialog;
     /**
      * 二维码解析回调函数
      */
@@ -156,11 +158,12 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
 
     @Override
     public void showNoSupportQrCode() {
-        new HMAlertDialog.Builder(mContext)
-                .setTitle("扫描结果")
-                .setMessage("条管家无法识别其他来源的二维码")
-                .setNegativeButton("确认")
-                .create()
-                .show();
+        if (mDialog == null) {
+            mDialog = new HMAlertDialog.Builder(mContext)
+                    .setTitle("扫描结果")
+                    .setMessage("条管家无法识别其他来源的二维码")
+                    .create();
+        }
+        mDialog.show();
     }
 }
