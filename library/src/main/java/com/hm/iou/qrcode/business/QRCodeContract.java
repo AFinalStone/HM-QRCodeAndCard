@@ -34,6 +34,11 @@ public interface QRCodeContract {
          * @param uuid
          */
         void toBackendLogin(String ip, String uuid);
+
+        /**
+         * 提示该二维码条管家不支持解析
+         */
+        void showNoSupportQrCode();
     }
 
     interface Presenter extends BaseContract.BasePresenter {

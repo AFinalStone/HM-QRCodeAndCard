@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.hm.iou.base.BaseBizAppLike;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
@@ -223,6 +224,13 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
         }
         if (APP_OFFICIAL_WEBSITE_URL.equals(qrCodeContent)) {
             SystemUtil.openWebBrowser(mContext, qrCodeContent);
+            return;
+        }
+        Uri uri = Uri.parse(BaseBizAppLike.getInstance().getH5Server());
+        String authority = uri.getAuthority();
+        String scheme = uri.getSchemeSpecificPart();
+        if (!qrCodeContent.startsWith(authority + scheme)) {
+            mView.showNoSupportQrCode();
             return;
         }
         parseUrl(qrCodeContent);

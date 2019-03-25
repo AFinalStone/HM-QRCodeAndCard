@@ -16,6 +16,7 @@ import com.hm.iou.qrcode.business.QRCodeContract;
 import com.hm.iou.qrcode.business.presenter.QRCodePresenter;
 import com.hm.iou.scancode.CodeUtils;
 import com.hm.iou.scancode.view.ScanCodeFragment;
+import com.hm.iou.uikit.dialog.HMAlertDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -151,5 +152,15 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
     @Override
     public void toBackendLogin(String ip, String uuid) {
         NavigationHelper.toConfirmLoginActivity(this, ip, uuid, QRCodeConfirmLoginActivity.TYPE_BACKEND_LOGIN);
+    }
+
+    @Override
+    public void showNoSupportQrCode() {
+        new HMAlertDialog.Builder(mContext)
+                .setTitle("扫描结果")
+                .setMessage("条管家无法识别其他来源的二维码")
+                .setNegativeButton("确认")
+                .create()
+                .show();
     }
 }
