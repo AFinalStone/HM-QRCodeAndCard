@@ -226,8 +226,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
             SystemUtil.openWebBrowser(mContext, qrCodeContent);
             return;
         }
-        if (!qrCodeContent.startsWith(BaseBizAppLike.getInstance().getH5Server()) && !qrCodeContent.startsWith(BaseBizAppLike.getInstance().getApiServer())
-                && !qrCodeContent.startsWith(BaseBizAppLike.getInstance().getFileServer())) {
+        if (!qrCodeContent.contains("54jietiao.com") && !qrCodeContent.contains("192.168.1.254") && !qrCodeContent.contains("192.168.1.217")) {
             mView.showNoSupportQrCode();
             return;
         }
