@@ -162,6 +162,7 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
             mDialog = new HMAlertDialog.Builder(mContext)
                     .setTitle("扫描结果")
                     .setMessage("条管家无法识别其他来源的二维码")
+                    .setPositiveButton("确定")
                     .create();
         }
         mDialog.show();

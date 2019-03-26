@@ -11,6 +11,7 @@ import com.hm.iou.base.utils.CommSubscriber;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.logger.Logger;
+import com.hm.iou.network.exception.NoNetworkException;
 import com.hm.iou.qrcode.NavigationHelper;
 import com.hm.iou.qrcode.R;
 import com.hm.iou.qrcode.api.QRCodeApi;
@@ -121,8 +122,8 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                     @Override
                     public void handleException(Throwable throwable, String code, String msg) {
                         mView.dismissLoadingView();
-                        if (TextUtils.isEmpty(code)) {
-                            mView.toastMessage(msg);
+                        if (throwable instanceof NoNetworkException) {
+                            mView.toastErrorMessage(msg);
                         } else {
                             mView.showNoSupportQrCode();
                         }
@@ -224,10 +225,6 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
         }
         if (qrCodeContent.startsWith(APP_OFFICIAL_WEBSITE_URL)) {
             SystemUtil.openWebBrowser(mContext, qrCodeContent);
-            return;
-        }
-        if (!qrCodeContent.contains("54jietiao.com") && !qrCodeContent.contains("192.168.1.254") && !qrCodeContent.contains("192.168.1.217")) {
-            mView.showNoSupportQrCode();
             return;
         }
         parseUrl(qrCodeContent);
