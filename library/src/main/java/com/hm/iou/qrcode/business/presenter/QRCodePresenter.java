@@ -6,8 +6,11 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.hm.iou.base.BaseBizAppLike;
+import com.hm.iou.base.comm.CommApi;
+import com.hm.iou.base.comm.PowerSearchResult;
 import com.hm.iou.base.mvp.MvpActivityPresenter;
 import com.hm.iou.base.utils.CommSubscriber;
+import com.hm.iou.base.utils.RouterUtil;
 import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.base.utils.TraceUtil;
 import com.hm.iou.logger.Logger;
@@ -55,6 +58,34 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     @Override
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void judgeData(String qrCodeContent) {
+        Logger.d("二维码内容:" + qrCodeContent);
+        if (TextUtils.isEmpty(qrCodeContent)) {
+            return;
+        }
+
+        if (qrCodeContent.startsWith(APP_OFFICIAL_WEBSITE_URL)) {
+            SystemUtil.openWebBrowser(mContext, qrCodeContent);
+            return;
+        }
+
+        if (qrCodeContent.startsWith(BaseBizAppLike.getInstance().getH5Server() + "/userQrcode/index.html")) {
+            try {
+                Uri uri = Uri.parse(qrCodeContent);
+                String showId = uri.getQueryParameter("showId");
+                if (!TextUtils.isEmpty(showId)) {
+                    searchFriend(showId);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
+        parseUrl(qrCodeContent);
     }
 
     /**
@@ -217,17 +248,31 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                 });
     }
 
-    @Override
-    public void judgeData(String qrCodeContent) {
-        Logger.d("二维码内容:" + qrCodeContent);
-        if (TextUtils.isEmpty(qrCodeContent)) {
-            return;
-        }
-        if (qrCodeContent.startsWith(APP_OFFICIAL_WEBSITE_URL)) {
-            SystemUtil.openWebBrowser(mContext, qrCodeContent);
-            return;
-        }
-        parseUrl(qrCodeContent);
+    /**
+     * 搜索好友
+     *
+     * @param showId
+     */
+    private void searchFriend(String showId) {
+        mView.showLoadingView();
+        CommApi.powerSearch(showId, 3)
+                .compose(getProvider().<BaseResponse<PowerSearchResult>>bindUntilEvent(ActivityEvent.DESTROY))
+                .map(RxUtil.<PowerSearchResult>handleResponse())
+                .subscribeWith(new CommSubscriber<PowerSearchResult>(mView) {
+                    @Override
+                    public void handleResult(PowerSearchResult powerSearchResult) {
+                        mView.dismissLoadingView();
+                        String url = powerSearchResult.getUrl();
+                        if (!TextUtils.isEmpty(url)) {
+                            RouterUtil.clickMenuLink(mContext, url);
+                        }
+                    }
+
+                    @Override
+                    public void handleException(Throwable throwable, String s, String s1) {
+                        mView.dismissLoadingView();
+                    }
+                });
     }
 
     /**
