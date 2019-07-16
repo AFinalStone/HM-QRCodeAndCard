@@ -41,14 +41,14 @@
         android:layout_height="425dp"
         android:background="@mipmap/qrcode_background_my_card_unkown">
 
-        <com.hm.iou.uikit.ShapedImageView
+        <com.hm.iou.uikit.CircleImageView
             android:id="@+id/iv_header"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="41dp"
             android:src="@mipmap/uikit_icon_header_unknow"
-            app:shape_mode="circle" />
+            />
 
         <TextView
             android:id="@+id/tv_nickName"

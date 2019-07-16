@@ -32,7 +32,7 @@ public class PersonalCardFragment extends BaseFragment<PersonalCardPresenter> im
     @BindView(R2.id.iv_back)
     ImageView mIvBack;
     @BindView(R2.id.iv_header)
-    ShapedImageView mIvHeader;
+    ImageView mIvHeader;
     @BindView(R2.id.rl_background)
     RelativeLayout mRlBackground;
     @BindView(R2.id.tv_nickName)
