@@ -9,6 +9,7 @@ import com.hm.iou.base.utils.RxUtil;
 import com.hm.iou.demo.R;
 import com.hm.iou.network.HttpReqManager;
 import com.hm.iou.qrcode.api.QRCodeApi;
+import com.hm.iou.qrcode.business.view.PersonalCardV2Activity;
 import com.hm.iou.qrcode.business.view.QRCodeActivity;
 import com.hm.iou.qrcode.business.view.QRCodeConfirmLoginActivity;
 import com.hm.iou.sharedata.UserManager;
@@ -49,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
     public void onClickMyCard(View view) {
         Intent intent = new Intent(MainActivity.this, QRCodeActivity.class);
         intent.putExtra(QRCodeActivity.EXTRA_KEY_SHOW_TYPE, QRCodeActivity.SHOW_TYPE_MY_CARD);
+        startActivity(intent);
+    }
+
+    /**
+     * 分享我的名片
+     *
+     * @param view
+     */
+    public void toShareMyCard(View view) {
+        Intent intent = new Intent(MainActivity.this, PersonalCardV2Activity.class);
         startActivity(intent);
     }
 
