@@ -21,10 +21,10 @@ public class QRCodeApplication extends Application {
         Router.init(this);
         BaseBizAppLike appLike = new BaseBizAppLike();
         appLike.onCreate(this);
-        appLike.initServer("http://192.168.1.217", "http://192.168.1.217",
-                "http://192.168.1.217");
-/*        appLike.initServer("https://api.54jietiao.com", "https://api.54jietiao.com",
-                "https://h5.54jietiao.com");*/
+        appLike.initServer("http://dev.54jietiao.com", "http://dev.54jietiao.com",
+                "http://dev.54jietiao.com");
+//        appLike.initServer("https://api.54jietiao.com", "https://api.54jietiao.com",
+//                "https://h5.54jietiao.com");
         Logger.init(this, true);
         initNetwork();
     }
