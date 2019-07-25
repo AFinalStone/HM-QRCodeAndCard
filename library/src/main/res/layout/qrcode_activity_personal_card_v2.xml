@@ -54,13 +54,14 @@
                 <TextView
                     android:id="@+id/tv_nick_name"
                     style="@style/UikitTextView"
-                    android:layout_marginStart="100dp"
-                    android:layout_marginTop="19dp"
+                    android:maxWidth="170dp"
+                    android:layout_alignStart="@+id/tv_name_and_id"
+                    android:layout_alignTop="@+id/iv_header"
                     android:ellipsize="end"
                     android:lineSpacingMultiplier="1.2"
-                    android:maxLines="2"
+                    android:singleLine="true"
                     android:textSize="@dimen/textFontSize_18"
-                    tools:text="小狼狗" />
+                    tools:text="小狼狗小狼狗小狼狗小狼狗" />
 
                 <TextView
                     android:id="@+id/tv_name_and_id"
