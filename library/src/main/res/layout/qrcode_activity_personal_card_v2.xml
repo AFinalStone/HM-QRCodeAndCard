@@ -51,26 +51,36 @@
                     android:layout_marginEnd="-1dp"
                     tools:src="@mipmap/uikit_ic_gender_man" />
 
-                <TextView
-                    android:id="@+id/tv_nick_name"
-                    style="@style/UikitTextView"
-                    android:maxWidth="170dp"
-                    android:layout_alignStart="@+id/tv_name_and_id"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_alignTop="@+id/iv_header"
-                    android:ellipsize="end"
-                    android:lineSpacingMultiplier="1.2"
-                    android:singleLine="true"
-                    android:textSize="@dimen/textFontSize_18"
-                    tools:text="小狼狗小狼狗小狼狗小狼狗" />
-
-                <TextView
-                    android:id="@+id/tv_name_and_id"
-                    style="@style/UikitTextView.Auxiliary"
-                    android:layout_below="@id/tv_nick_name"
                     android:layout_marginStart="100dp"
-                    android:layout_marginTop="5dp"
-                    android:textSize="@dimen/textFontSize_12"
-                    tools:text="未实名    ID:345 567" />
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_nick_name"
+                        style="@style/UikitTextView"
+                        android:ellipsize="end"
+                        android:lineSpacingMultiplier="1.2"
+                        android:maxWidth="170dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/textFontSize_18"
+                        tools:text="小狼狗小狼狗小狼狗小狼狗" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="5dp" />
+
+                    <TextView
+                        android:id="@+id/tv_name_and_id"
+                        style="@style/UikitTextView.Auxiliary"
+                        android:textSize="@dimen/textFontSize_12"
+                        tools:text="未实名    ID:345 567" />
+
+                </LinearLayout>
+
 
                 <ImageView
                     android:id="@+id/iv_qr_code"
