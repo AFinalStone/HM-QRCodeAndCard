@@ -45,7 +45,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     private static final String PARAMETER_PROTOCOL_BACK_BIND_USER = "4";        //后台绑定用户
     private static final String PARAMETER_PROTOCOL_BACK_LOGIN = "5";        //后台登录
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW_V2 = "6";   //电子借条V2.0
-
+    private static final String PARAMETER_PROTOCOL_TYPE_ELEC_QIANTIAO = "7";    //电子欠条
 
     //http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
 
@@ -145,6 +145,11 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                             return;
                         }
 
+                        //电子欠条
+                        if (PARAMETER_PROTOCOL_TYPE_ELEC_QIANTIAO.equals(type)) {
+                            scanQrcodeElecBorrowV2(realCodeContent);
+                            return;
+                        }
 
                         mView.dismissLoadingView();
                         mView.toastMessage("当前版本暂不支持该功能");
