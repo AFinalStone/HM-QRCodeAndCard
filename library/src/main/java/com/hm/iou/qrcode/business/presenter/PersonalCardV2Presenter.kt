@@ -10,7 +10,6 @@ import com.hm.iou.scancode.CodeUtils
 import com.hm.iou.sharedata.UserManager
 import com.hm.iou.sharedata.model.CustomerTypeEnum
 import com.hm.iou.sharedata.model.SexEnum
-import com.hm.iou.tools.kt.dp2px
 
 class PersonalCardV2Presenter(context: Context, view: PersonalCardV2Contract.View) : MvpActivityPresenter<PersonalCardV2Contract.View>(context, view), PersonalCardV2Contract.Presenter {
 
@@ -52,13 +51,18 @@ class PersonalCardV2Presenter(context: Context, view: PersonalCardV2Contract.Vie
         if (resIdSex != null) {
             mView.setSexImageResId(resIdSex)
         }
-        //二维码
-        val length = mContext.dp2px(240)
+        //二维码， 二维码图片，没必要根据分辨率来设置大小，
+        val length = 300
 
         val qrCodeUrl = String.format("%s/userQrcode/index.html?showId=%s", BaseBizAppLike.getInstance().h5Server, userDataBean.showId)
         Logger.d("QrCodeUrl: $qrCodeUrl")
-        val bitmap = CodeUtils.createImage(qrCodeUrl, length, length, null)
-        mView.setQRCodeImage(bitmap)
+
+        try {
+            val bitmap = CodeUtils.createImage(qrCodeUrl, length, length, null)
+            mView.setQRCodeImage(bitmap)
+        } catch (e: Exception) {
+            //防止内存溢出
+        }
     }
 
     companion object {

@@ -88,6 +88,7 @@
                     android:layout_height="240dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="100dp"
+                    android:scaleType="fitXY"
                     tools:src="@color/uikit_green" />
 
                 <TextView
