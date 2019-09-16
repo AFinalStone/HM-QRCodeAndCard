@@ -46,6 +46,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     private static final String PARAMETER_PROTOCOL_BACK_LOGIN = "5";        //后台登录
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW_V2 = "6";   //电子借条V2.0
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_QIANTIAO = "7";    //电子欠条
+    private static final String PARAMETER_PROTOCOL_TYPE_BORROW_CODE = "8";      //借款码
 
     //http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
 
@@ -148,6 +149,15 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                         //电子欠条
                         if (PARAMETER_PROTOCOL_TYPE_ELEC_QIANTIAO.equals(type)) {
                             scanQrcodeElecBorrowV2(realCodeContent);
+                            return;
+                        }
+
+                        //借款码
+                        if (PARAMETER_PROTOCOL_TYPE_BORROW_CODE.equals(type)) {
+                            String code = uri.getQueryParameter("code");
+                            Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/ioucode/clipboard_detail")
+                                    .withString("code", code)
+                                    .navigation(mContext);
                             return;
                         }
 
