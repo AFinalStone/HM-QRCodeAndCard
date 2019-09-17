@@ -158,6 +158,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                             Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/ioucode/clipboard_detail")
                                     .withString("code", code)
                                     .navigation(mContext);
+                            mView.closeCurrPage();
                             return;
                         }
 
