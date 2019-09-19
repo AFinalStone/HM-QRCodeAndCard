@@ -154,11 +154,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
 
                         //借款码
                         if (PARAMETER_PROTOCOL_TYPE_BORROW_CODE.equals(type)) {
-                            String code = uri.getQueryParameter("code");
-                            Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/ioucode/clipboard_detail")
-                                    .withString("code", code)
-                                    .navigation(mContext);
-                            mView.closeCurrPage();
+                            scanQrcodeElecBorrowV2(realCodeContent);
                             return;
                         }
 
@@ -247,9 +243,7 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
                     @Override
                     public void handleResult(String url) {
                         mView.dismissLoadingView();
-                        Router.getInstance().buildWithUrl("hmiou://m.54jietiao.com/webview/index")
-                                .withString("url", url)
-                                .navigation(mContext);
+                        RouterUtil.clickMenuLink(mContext, url);
                         mView.closeCurrPage();
                     }
 
