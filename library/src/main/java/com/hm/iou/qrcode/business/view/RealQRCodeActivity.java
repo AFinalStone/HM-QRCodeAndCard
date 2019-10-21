@@ -138,7 +138,7 @@ public class RealQRCodeActivity extends BaseActivity<QRCodePresenter> implements
         } else {
             tx.show(newFragment); // 隐藏当前的fragment，显示下一个
         }
-        tx.commit();
+        tx.commitAllowingStateLoss();
     }
 
     @Override
