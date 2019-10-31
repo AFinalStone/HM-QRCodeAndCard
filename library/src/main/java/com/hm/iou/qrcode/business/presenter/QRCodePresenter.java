@@ -47,6 +47,8 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_BORROW_V2 = "6";   //电子借条V2.0
     private static final String PARAMETER_PROTOCOL_TYPE_ELEC_QIANTIAO = "7";    //电子欠条
     private static final String PARAMETER_PROTOCOL_TYPE_BORROW_CODE = "8";      //借款码
+    private static final String PARAMETER_PROTOCOL_TYPE_BORROW_SQUARE = "9";      //借款码
+
 
     //http://h5.54jietiao.com/IOU/Money/Template/5dd0b90393bb4d35bf71591f9c475c37/index.html?protocol=1&justiceId=180513173001000011
 
@@ -154,6 +156,11 @@ public class QRCodePresenter extends MvpActivityPresenter<QRCodeContract.View> i
 
                         //借款码
                         if (PARAMETER_PROTOCOL_TYPE_BORROW_CODE.equals(type)) {
+                            scanQrcodeElecBorrowV2(realCodeContent);
+                            return;
+                        }
+
+                        if(PARAMETER_PROTOCOL_TYPE_BORROW_SQUARE.equals(type)) {
                             scanQrcodeElecBorrowV2(realCodeContent);
                             return;
                         }
